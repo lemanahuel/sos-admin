@@ -1,0 +1,101 @@
+<div class="schedule-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-9">
+        <h2 class="section-title" ng-if="vm.camadaTmp._id">Agenda /
+          <b ng-bind="vm.camadaTmp.id  + ' - ' + vm.camadaTmp.class.name"></b>
+        </h2>
+        <h2 class="section-title" ng-if="!vm.camadaTmp._id">Agenda /
+          <b>Nuevo</b>
+        </h2>
+      </div>
+      <div class="col-sm-3" ng-if="::!PERMISSIONS.student">
+        <a href="#" ng-click="vm.onClickShowHolidays($event)" class="btn btn-rounded btn-link pull-right">Feriados</a>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-content">
+          <div class="row" ng-if="!vm.camadaTmp._id">
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+                <label>Camada</label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-users"></i>
+                  </span>
+                  <input type="text" class="form-control" value="{{::vm.camadaTmp.id + ' - ' + (vm.camadaTmp.name ? vm.camadaTmp.name : '')}}" disabled ng-if="::!PERMISSIONS.admin" />
+                  <select class="form-control" ng-model="vm.camadaId" ng-if="::PERMISSIONS.admin">
+                    <option value="">Selecciona</option>
+                    <option ng-repeat="item in ::vm.camadas | orderBy : '-id' track by item._id" ng-if="::!item.completed" value="{{::item._id}}" ng-bind="item.id + ' - ' + item.class.name + ' ' + (item.type === 'remote' ? '(romoto)' : '')"></option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <p class="help-text">
+                Los contenidos como recursos, nivelacion, deben estar disponibles desde mucho antes de que comienze el curso, aproximadamente un mes.
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="row" ng-if="vm.stages.length">
+                <div class="col-md-12">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Orden</th>
+                          <th>Clase</th>
+                          <th ng-if="vm.currentCamada.type === 'remote'">Link Remoto</th>
+                          <th>Dia</th>
+                          <th>Desde</th>
+                          <th>Hasta</th>
+                          <th width="5%" ng-if="::PERMISSIONS.admin" class="text-center">&nbsp;</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-if="!item.starter && item.enable" ng-repeat="item in vm.stages | orderBy : item.date track by item._id" id="{{item._id}}">
+                          <td style="vertical-align: middle;" ng-bind="item.order" width="1%" class="text-center"></td>
+                          <td width="25%" style="vertical-align: middle;" ng-bind="item.name"></td>
+                          <td width="25%" style="vertical-align: middle;" ng-if="vm.currentCamada.type === 'remote'">
+                            <input type="text" class="form-control" ng-model="item.schedule.remoteUrl" />
+                          </td>
+                          <td width="10%">
+                            <input type="date" class="form-control" ng-model="item.schedule.day">
+                          </td>
+                          <td width="5%">
+                            <uib-timepicker ng-model="item.schedule.from" hour-step="1" minute-step="15" mousewheel="false" show-meridian="false" show-spinners="false"></uib-timepicker>
+                          </td>
+                          <td width="5%">
+                            <uib-timepicker ng-model="item.schedule.to" hour-step="1" minute-step="15" mousewheel="false" show-meridian="false" show-spinners="false"></uib-timepicker>
+                          </td>
+                          <td style="vertical-align: middle;" ng-if="::PERMISSIONS.admin" class="btn-save text-center">
+                            <button ng-click="vm.onClickSaveDate($event, item)" class="btn btn-primary">Guardar</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row btns-container">
+      <div class="col-md-12">
+        <!-- <button ng-if="::PERMISSIONS.admin" ng-click="vm.onClickRemove()" class="btn  btn-link" ng-show="vm.scheduleTmp._id">Eliminar</button> -->
+        <button ui-sref="schedules" class="btn  btn-default">Cancelar</button>
+        <button ng-if="::PERMISSIONS.admin" ng-click="vm.onSubmit()" class="btn  btn-primary pull-right">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

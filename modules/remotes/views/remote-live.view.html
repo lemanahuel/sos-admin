@@ -1,0 +1,20 @@
+<div class="remote-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <h2 class="section-title" ng-if="vm.remoteTmp._id">Remoto /
+          <b ng-bind="vm.remoteTmp.stage.class.name"></b> /
+          <b ng-bind="vm.remoteTmp.stage.name"></b>
+        </h2>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <br/>
+    <div class="row">
+      <div class="col-md-12">
+        <iframe ng-src="{{::vm.remoteTmp.remoteUrl}}" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0" allowtransparency="true" style="border: 1px solid #EEE;border-radius:3px;"></iframe>
+      </div>
+    </div>
+  </div>
+</div>

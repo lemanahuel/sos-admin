@@ -1,0 +1,52 @@
+<div class="remote-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <h2 class="section-title" ng-if="vm.remoteTmp._id">Remoto</h2>
+        <h2 class="section-title" ng-if="!vm.remoteTmp._id">Remoto /
+          <b>Nuevo</b>
+        </h2>
+      </div>
+      <div class="col-xs-12 col-md-6" ng-if="vm.remoteTmp._id">
+        <a ui-sref="remote-live({remoteId: vm.remoteTmp._id})" class="btn btn-rounded btn-primary pull-right">LIVE</a>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-content">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label>Curso</label>
+              <input ng-if="::!PERMISSIONS.admin" required type="text" class="form-control" ng-model="vm.remoteTmp.class.name" disabled />
+              <select ng-if="::PERMISSIONS.admin" class="form-control" ng-model="vm.classTmp" ng-options="item.name for item in vm.classes | orderBy : 'name' track by item._id">
+                <option value="">Selecciona</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Clase</label>
+              <input ng-if="::!PERMISSIONS.admin" required type="text" class="form-control" ng-model="vm.remoteTmp.stage.name" disabled />
+              <select ng-if="::PERMISSIONS.admin" class="form-control" ng-model="vm.stageTmp" ng-options="item.name for item in vm.classTmp.stages | orderBy : 'order' track by item._id">
+                <option value="">Selecciona</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>URL</label>
+              <input required type="text" class="form-control" ng-model="vm.remoteTmp.url" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row btns-container">
+      <div class="col-md-12">
+        <button ng-if="::PERMISSIONS.admin" ng-click="vm.onClickRemove()" class="btn  btn-link" ng-show="vm.remoteTmp._id">Eliminar</button>
+        <button ui-sref="remotes" class="btn  btn-default">Cancelar</button>
+        <button ng-if="::PERMISSIONS.admin" ng-click="vm.onSubmit()" class="btn btn-primary pull-right">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

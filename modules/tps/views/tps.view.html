@@ -1,0 +1,98 @@
+<div class="tps-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <h2 class="section-title">
+          <b>Trabajos Practicos</b>
+        </h2>
+      </div>
+      <!-- <div class="col-xs-12 col-md-6">
+        <a ui-sref="module-new" class="btn btn-rounded btn-primary pull-right">Crear</a>
+      </div> -->
+    </div>
+  </div>
+  <div class="container-fluid">
+    <br/>
+    <div class="row">
+      <div class="col-md-3" ng-if="PERMISSIONS.teacher">
+        <div class="form-group">
+          <label>Camada</label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-users"></i>
+            </span>
+            <select class="form-control" ng-model="vm.currentCamada">
+              <option value="">Todos</option>
+              <option ng-repeat="item in vm.camadas | orderBy : 'id' track by $index" ng-value="item._id" ng-bind="item.id +' '+ (item.name || '')"></option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Estado</label>
+          <select class="form-control" ng-model="vm.currentStatus">
+            <option value="">Todos</option>
+            <option ng-if="::PERMISSIONS.admin" value="1">Aprobado</option>
+            <option value="2">Desaprobado</option>
+            <option value="0">No Verificado</option>
+          </select>
+        </div>
+      </div>
+      <!-- <div class="col-md-3 pull-right">
+        <div class="form-group">
+          <label>&nbsp;</label>
+          <input class="form-control" type="text" placeholder="Buscar" ng-model="vm.currentSearch" />
+        </div>
+      </div> -->
+    </div>
+  </div>
+  <div class="container-fluid">
+    <br/>
+    <div class="row" ng-if="vm.tps.length">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th ng-if="::!PERMISSIONS.student" ng-click="vm.onClickOrderBy('camada.id')">Camada</th>
+                <th ng-click="vm.onClickOrderBy('module.stage.class.name')">Curso</th>
+                <th ng-click="vm.onClickOrderBy('module.stage.name')">Clase</th>
+                <th ng-click="vm.onClickOrderBy('module.name')">Contenido</th>
+                <th ng-click="vm.onClickOrderBy('user.email')" ng-if="::!PERMISSIONS.student">Estudiante</th>
+                <th ng-click="vm.onClickOrderBy('url')">Repo</th>
+                <th class="text-center" ng-click="vm.onClickOrderBy('status')">Estado</th>
+                <!-- <th width="5%" class="text-center">&nbsp;</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in vm.tps | filter: {status: vm.currentStatus, camada:{_id: vm.currentCamada}} | orderBy : vm.currentOrder track by item._id" id="{{item._id}}" ng-click="vm.onClickEdit($event, item._id)">
+                <td ng-bind="item.camada.id"></td>
+                <td ng-bind="item.module.stage.class.name"></td>
+                <td ng-bind="item.module.stage.name"></td>
+                <td ng-bind="item.module.name"></td>
+                <td ng-bind="item.user.email" ng-if="::!PERMISSIONS.student"></td>
+                <td>
+                  <a ng-if="item.url" ng-href="{{item.url}}" target="_blank">Ir al repo</a>
+                </td>
+                <td class="text-center">
+                  <i ng-if="item.status === 1" class="fa fa-check" title="Aprobado"></i>
+                  <i ng-if="item.status === 2" class="fa fa-times" title="Desaprobado"></i>
+                  <i ng-if="item.status === 0">No verificado</i>
+                </td>
+                <!-- <td class="btn-delete text-center" ng-click="vm.onClickRemove($event, item._id)">
+                <i class="fa fa-times"></i>
+              </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-if="!vm.tps.length">
+      <div class="col-md-12">
+        <p>No hay tps...</p>
+      </div>
+    </div>
+  </div>
+</div>

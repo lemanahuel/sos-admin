@@ -1,0 +1,165 @@
+<div class="profile-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-7">
+        <h2 class="section-title" ng-if="vm.userTmp.profile.first_name">Perfil /
+          <b ng-bind="vm.userTmp.profile.first_name + ' ' + vm.userTmp.profile.last_name"></b>
+        </h2>
+        <h2 class="section-title" ng-if="!vm.userTmp.profile.first_name">Perfil /
+          <b>Nuevo</b>
+        </h2>
+        <br>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <form class="container-fluid" ng-submit="vm.onSubmit()">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-content">
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <div class="row">
+                <div class="form-group col-md-12 avatar-container">
+                  <img ng-src="{{vm.userTmp.profile.avatar}}" alt="" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-12">
+                  <label>Avatar</label>
+                  <input type="file" class="form-control" ngf-select="" ng-model="vm.avatarFile" name="file" ngf-accept="'image/*'" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label>Nombre</label>
+                  <input type="text" class="form-control" ng-model="vm.userTmp.profile.first_name" required />
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Apellido</label>
+                  <input type="text" class="form-control" ng-model="vm.userTmp.profile.last_name" required />
+                </div>
+                <div class="form-group col-md-12">
+                  <p class="help-text">
+                    Ten en cuenta que el <b>nombre</b> y <b>apellido</b> que coloques iran impresos en el certificado.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="row">
+                <div class="form-group col-md-4">
+                  <label>Telefono</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-mobile"></i>
+                    </span>
+                    <input type="tel" class="form-control" ng-model="vm.userTmp.profile.phone" required />
+                  </div>
+                </div>
+                <div class="form-group col-md-4">
+                  <label>Genero</label>
+                  <select class="form-control" ng-model="vm.userTmp.profile.gender" required>
+                    <option value="">Selecciona</option>
+                    <option value="hombre">Hombre</option>
+                    <option value="mujer">Mujer</option>
+                    <option value="trans">Trans</option>
+                    <option value="neutro">Neutro</option>
+                    <option value="ninguno">Ninguno</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-4">
+                  <label>Cumpleaños</label>
+                  <p class="input-group">
+                    <input type="text" class="form-control" ng-model="vm.userTmp.profile.bday" uib-datepicker-popup="{{vm.datePicker.format}}" is-open="vm.datePicker.popup.opened" datepicker-options="vm.datePicker.options" close-text="Cerrar" alt-input-formats="vm.datePicker.altInputFormats"
+                    />
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="vm.datePicker.popup.onClickOpen()">
+                      <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                  </span>
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label>Ciudad</label>
+                  <input required type="text" g-places-autocomplete options="vm.geoConfig" class="form-control" placeholder="Ciudad" ng-model="vm.userTmp.profile.city" />
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Estudios</label>
+                  <input type="text" class="form-control" ng-model="vm.userTmp.profile.study" placeholder="Ej: Diseño grafico" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Github</label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-github"></i>
+                  </span>
+                  <input type="url" class="form-control" placeholder="Ej: https://github.com/MiUsuario" ng-model="vm.userTmp.profile.github" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Linkedin</label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-linkedin"></i>
+                  </span>
+                  <input type="url" class="form-control" placeholder="Ej: https://ar.linkedin.com/in/MiUsuario" ng-model="vm.userTmp.profile.linkedin" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Behance</label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-behance"></i>
+                  </span>
+                  <input type="url" class="form-control" placeholder="Ej: https://www.behance.net/MiUsuario" ng-model="vm.userTmp.profile.behance" />
+                </div>
+              </div>
+              <!-- <div class="form-group">
+                <label>Otro</label>
+                <input type="text" class="form-control" placeholder="Que otras l" ng-model="vm.userTmp.profile.otros" />
+              </div> -->
+            </div>
+          </div>
+          <div class="row certifications-container" ng-if="::vm.userTmp.profile.certifications.length">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Certificados</label>
+                <br>
+                <div class="row">
+                  <div class="col-sm-3 col-md-3" ng-repeat="item in ::vm.userTmp.profile.certifications | orderBy:'class.name' track by item._id">
+                    <a href="{{::item.url}}" target="_blank">
+                      <div class="thumbnail">
+                        <br>
+                        <div class="image" style="background-color: {{::item.style}}">
+                          <img ng-src="{{::item.logo}}" alt="{{::item.class.name}}">
+                        </div>
+                        <div class="caption">
+                          <h4 ng-bind="::item.class.name"></h4>
+                          <div class="btn-group btn-group-justified" role="group">
+                            <span class="btn btn-default btn-linkedin" ng-click="vm.onClickLinkedin($event, item.linkedinUrl)" target="_blank"><i class="fa fa-linkedin-square" aria-hidden="true"></i>&nbsp;&nbsp;Agregar al perfil</span>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row btns-container">
+      <div class="col-md-12">
+        <!-- <button ng-if="::PERMISSIONS.admin" ng-click="vm.onClickRemove()" class="btn  btn-link" ng-show="vm.userTmp.profile._id">Eliminar</button> -->
+        <button ng-if="::PERMISSIONS.admin" ui-sref="profiles" class="btn  btn-default">Cancelar</button>
+        <button type="submit" class="btn btn-primary pull-right">Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>

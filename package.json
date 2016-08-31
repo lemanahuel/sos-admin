@@ -1,0 +1,82 @@
+{
+  "name": "ch-admin",
+  "version": "2.0.0",
+  "description": "Coderhouse",
+  "private": true,
+  "homepage": "http://coderhouse.io",
+  "author": "Coderhouse Team",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CoderHouse/ch-admin"
+  },
+  "contributors": [{
+    "name": "Coderhouse TEAM",
+    "email": "hola@coderhouse.com"
+  }],
+  "engines": {
+    "node": "6.x.x",
+    "npm": "3.x.x"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "public/libs"
+  ],
+  "scripts": {
+    "start": "grunt",
+    "postinstall": "bower install --config.interactive=false"
+  },
+  "dependencies": {
+    "async": "^2.0.1",
+    "body-parser": "^1.15.2",
+    "bower": "1.7.9",
+    "grunt": "~1.0.1",
+    "chalk": "^1.1.3",
+    "cloudinary": "^1.4.1",
+    "compression": "~1.6.2",
+    "connect-flash": "~0.1.1",
+    "connect-multiparty": "^2.0.0",
+    "consolidate": "^0.14.1",
+    "cookie-parser": "~1.4.3",
+    "express": "^4.14.*",
+    "express-session": "^1.14.*",
+    "glob": "~7.0.5",
+    "helmet": "^2.1.2",
+    "imsave": "~2.0.0",
+    "lodash": "^4.15.0",
+    "method-override": "~2.3.6",
+    "morgan": "^1.7.0",
+    "request": "^2.74.0",
+    "serve-favicon": "^2.3.0",
+    "swig": "~1.4.2",
+    "url": "^0.11.0",
+    "json-mask": "0.3.8",
+    "eslint-plugin-angular": "^1.3.1",
+    "grunt-angular-templates": "^1.1.0",
+    "grunt-autoprefixer": "^3.0.4",
+    "grunt-cdnify": "^1.0.2",
+    "grunt-concurrent": "~2.3.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "1.0",
+    "grunt-contrib-csslint": "^1.0.0",
+    "grunt-contrib-cssmin": "~1.0.1",
+    "grunt-contrib-htmlmin": "^2.0.0",
+    "grunt-contrib-imagemin": "~1.0.1",
+    "grunt-contrib-jshint": "~1.0.0",
+    "grunt-contrib-less": "~1.4.0",
+    "grunt-contrib-uglify": "~2.0.0",
+    "grunt-contrib-watch": "~1.0.0",
+    "grunt-env": "~0.4.4",
+    "grunt-esformatter": "^1.2.0",
+    "grunt-eslint": "^19.0.0",
+    "grunt-google-cdn": "~0.4.3",
+    "grunt-lesslint": "^3.2.0",
+    "grunt-ng-annotate": "~2.0.2",
+    "grunt-nodemon": "~0.4.2",
+    "grunt-parallel": "^0.5.1",
+    "grunt-prettify": "^0.4.0",
+    "grunt-sloc": "^0.7.1",
+    "jshint-stylish": "^2.2.1",
+    "load-grunt-tasks": "~3.5.2"
+  },
+  "devDependencies": {}
+}
