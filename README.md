@@ -1,5 +1,3 @@
-[![Coderhouse](https://www.coderhouse.com/modules/core/client/img/footer-logo.jpg)](https://www.coderhouse.com/)
-
 # SOS-ADMIN
 
 # Requisitos
