@@ -14,7 +14,7 @@ angular
       } else if ($rootScope.AUTH_PROFILE.picture) {
         vm.currentPicture = $rootScope.AUTH_PROFILE.picture;
       } else {
-        vm.currentPicture = 'modules/core/client/img/ch-icon.ico';
+        vm.currentPicture = 'modules/core/client/img/sos-icon.ico';
       }
 
       (function () {

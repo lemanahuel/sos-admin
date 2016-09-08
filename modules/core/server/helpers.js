@@ -24,6 +24,6 @@ module.exports.handleResponse = (res, err, doc, next) => {
 };
 
 module.exports.domainWhiteList = (host) => {
-  let hosts = ['localhost:3004', 'ch-admin-qa.herokuapp.com', 'ch-admin.herokuapp.com', 'admin.coderhouse.com', 'admin.coderhouse.io', 'coderhouse.io', 'coderhouse.com', 'www.coderhouse.io', 'www.coderhouse.com'];
+  let hosts = ['localhost:3004', 'sos-admin-qa.herokuapp.com', 'sos-admin.herokuapp.com', 'admin.coderhouse.com', 'admin.coderhouse.io', 'coderhouse.io', 'coderhouse.com', 'www.coderhouse.io', 'www.coderhouse.com'];
   return hosts.indexOf(host) !== -1;
 };

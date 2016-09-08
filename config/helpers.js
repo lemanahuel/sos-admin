@@ -11,16 +11,16 @@ module.exports.forceHttps = (req, res, next) => {
     if (env === 'development') {
       host = 'localhost:3040';
     }
-    if (host === 'coderhouse.io' || host === 'ch-www.herokuapp.com') {
-      host = 'www.coderhouse.io';
+    if (host === 'voluntariosos.io' || host === 'ch-www.herokuapp.com') {
+      host = 'www.voluntariosos.io';
     }
     if (req.url.indexOf('/api/') !== 0) {
       res.redirect(301, 'https://' + host + req.url);
     } else {
       next();
     }
-  } else if (host === 'coderhouse.io' || host === 'ch-www.herokuapp.com') {
-    res.redirect(301, 'https://www.coderhouse.io' + req.url);
+  } else if (host === 'voluntariosos.io' || host === 'ch-www.herokuapp.com') {
+    res.redirect(301, 'https://www.voluntariosos.io' + req.url);
   } else {
     next();
   }
@@ -33,8 +33,8 @@ module.exports.unforceWww = (req, res, next) => {
     host = 'localhost:3004';
   }
 
-  if (host === 'www.coderhouse.io' || host === 'ch-www.herokuapp.com') {
-    host = 'coderhouse.io';
+  if (host === 'www.voluntariosos.io' || host === 'ch-www.herokuapp.com') {
+    host = 'voluntariosos.io';
     res.redirect(301, 'http://' + host + req.url);
   } else {
     next();
@@ -65,8 +65,8 @@ module.exports.interceptFacebookMeta = (req, res, next) => {
     });
 
     let apiHost = 'localhost:3002';
-    if (req.hostname === 'www.coderhouse.io' || req.hostname === 'ch-www.herokuapp.com') {
-      apiHost = 'api.coderhouse.io';
+    if (req.hostname === 'www.voluntariosos.io' || req.hostname === 'ch-www.herokuapp.com') {
+      apiHost = 'api.voluntariosos.io';
     } else if (req.hostname === 'ch-www-qa.herokuapp.com') {
       apiHost = 'ch-api-qa.herokuapp.com';
     }

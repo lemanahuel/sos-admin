@@ -2,7 +2,7 @@
 
 module.exports = {
   app: {
-    site: 'http://coderhouse.io',
+    site: 'http://voluntariosos.io',
     title: 'Coderhouse | Cursos de Programación, Marketing y Diseño',
     description: 'Escuela de Programación Web y Mobile, Diseño UX y Marketing Online. Cursos presenciales y remotos.',
     keywords: '',

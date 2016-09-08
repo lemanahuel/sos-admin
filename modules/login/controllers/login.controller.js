@@ -17,7 +17,7 @@ angular
         primaryColor: '#43c1c2',
         dict: 'es',
         gravatar: true,
-        icon: './modules/core/client/img/ch-icon.ico',
+        icon: './modules/core/client/img/sos-icon.ico',
         closable: false,
         sso: false
       }, function (auth_profile, idToken) {

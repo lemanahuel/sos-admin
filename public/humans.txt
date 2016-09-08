@@ -3,7 +3,7 @@
 
 /* TEAM */
 	The Coderhouse Team
-	Contact: hola@coderhouse.com
+	Contact: hola@voluntariosos.com
 
 # TECHNOLOGY COLOPHON
 

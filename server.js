@@ -5,4 +5,4 @@ const config = require('./config/config'),
 
 express.init();
 
-console.log('CH-ADMIN application started on port ' + config.port + ' or secure ' + config.securePort);
+console.log('SOS-ADMIN application started on port ' + config.port + ' or secure ' + config.securePort);

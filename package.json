@@ -1,18 +1,6 @@
 {
-  "name": "ch-admin",
-  "version": "2.0.0",
-  "description": "Coderhouse",
-  "private": true,
-  "homepage": "http://coderhouse.io",
-  "author": "Coderhouse Team",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/CoderHouse/ch-admin"
-  },
-  "contributors": [{
-    "name": "Coderhouse TEAM",
-    "email": "hola@coderhouse.com"
-  }],
+  "name": "sos-admin",
+  "version": "1.0.0",
   "engines": {
     "node": "6.x.x",
     "npm": "3.x.x"

@@ -1,8 +1,7 @@
 'use strict';
 
 const _ = require('lodash'),
-  defaultAssets = require('./config/assets/default'),
-  cloudfront = '//d33utfl382x3hu.cloudfront.net';
+  defaultAssets = require('./config/assets/default');
 
 module.exports = (grunt) => {
   grunt.initConfig({
@@ -339,41 +338,6 @@ module.exports = (grunt) => {
       }
     },
 
-    cdnify: {
-      prod: {
-        options: {
-          html: {
-            'img[ng-src]': false,
-            'img[src]': 'src',
-            'link[rel=stylesheet]': 'href',
-            'link[type="image/x-icon"]': 'href',
-            'script[src]': 'src',
-            'video[poster]': 'poster',
-            'source[src]': 'src',
-            'meta[property="og:image"]': 'content'
-          },
-          rewriter: (url) => {
-            if (url.indexOf('http') === -1 && url.indexOf('cloudfront') === -1) {
-              url = url.split('?')[0];
-              url = url[0] === '/' ? url.substring(1) : url;
-              if (url.indexOf('js') !== -1 || url.indexOf('css') !== -1) {
-                if (url.indexOf('.min.js') !== -1) {
-                  return cloudfront + '/' + url;
-                }
-                return cloudfront + '/' + url + '?v=' + Date.now();
-              }
-              return cloudfront + '/' + url;
-            }
-            return url;
-          }
-        },
-        files: [{
-          expand: true,
-          src: ['modules/**/*.view.html', 'public/.tmp/application.css']
-        }]
-      }
-    },
-
     copy: {
       prod_fonts: {
         expand: true,
@@ -445,18 +409,6 @@ module.exports = (grunt) => {
     'uglify:prod_libs',
     'concat:prod',
     'copy:prod_fonts'
-  ]);
-
-  grunt.registerTask('build-prod-conc', [
-    'concurrent:prod',
-    'concurrent:prod1',
-    'concurrent:prod2',
-    'concurrent:prod3',
-    'concurrent:prod4',
-    'concurrent:prod5',
-    'concurrent:prod6',
-    'concurrent:prod7',
-    'concurrent:prod8'
   ]);
 
   grunt.registerTask('styles', ['less:dev', 'autoprefixer:prod', 'cssmin:prod']);

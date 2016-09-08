@@ -2,7 +2,7 @@
 'use strict';
 
 window.APP = (function () {
-  var NAME = 'CH-ADMIN';
+  var NAME = 'SOS-ADMIN';
 
   return {
     NAME: NAME,

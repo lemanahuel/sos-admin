@@ -6,15 +6,15 @@
 window.CH_API = (function () {
   var host = location.host,
     base = '';
-  //base = 'ch-api-qa.herokuapp.com';
+  //base = 'sos-api-qa.herokuapp.com';
 
-  if (host.indexOf('ch-admin-dev') !== -1) {
-    base = 'ch-api-dev.herokuapp.com';
-  } else if (host.indexOf('ch-admin-qa') !== -1) {
-    base = 'ch-api-qa.herokuapp.com';
-  } else if (host === 'dash.coderhouse.com' || host === 'ch-dash.herokuapp.com') {
+  if (host.indexOf('sos-admin-dev') !== -1) {
+    base = 'sos-api-dev.herokuapp.com';
+  } else if (host.indexOf('sos-admin-qa') !== -1) {
+    base = 'sos-api-qa.herokuapp.com';
+  } else if (host === 'dash.coderhouse.com' || host === 'sos-dash.herokuapp.com') {
     base = 'api.coderhouse.com';
-  } else if (host === 'coderhouse.io' || host === 'coderhouse.com' || host === 'ch-admin.herokuapp.com') {
+  } else if (host === 'coderhouse.io' || host === 'coderhouse.com' || host === 'sos-admin.herokuapp.com') {
     base = 'api.coderhouse.com';
   } else if (host.indexOf('localhost') !== -1) {
     base = host.split(':')[0] + ':3002';

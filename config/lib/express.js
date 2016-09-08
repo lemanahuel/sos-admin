@@ -125,7 +125,7 @@ module.exports.initViewEngine = (app) => {
 module.exports.initSession = (app) => {
   // Express MongoDB session storage
   // app.use(session({
-  //   key: 'coderhouse',
+  //   key: 'voluntariosos',
   //   saveUninitialized: true,
   //   resave: true,
   //   secret: config.sessionSecret,
