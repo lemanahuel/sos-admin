@@ -2,14 +2,11 @@
 
 angular
   .module('core')
-  .service('UsersSrv', ['$http', 'PATHS', '$rootScope',
-    function ($http, PATHS, $rootScope) {
+  .service('UsersSrv', ['$http', 'PATHS',
+    function ($http, PATHS) {
       return {
         get: function (params) {
-          params = params || {};
-          if (params && params.moduleId) {
-            return this.getTpByModule(params);
-          } else if (params && (params._id || params.id)) {
+          if (params && params._id) {
             return this.getById(params);
           }
           return this.getAll(params);
@@ -20,7 +17,7 @@ angular
           });
         },
         getById: function (params) {
-          return $http.get(PATHS.USERS + '/' + (params._id || params.id));
+          return $http.get(PATHS.USERS + '/' + params._id);
         },
         upsert: function (params) {
           if (params.user._id) {
@@ -35,12 +32,7 @@ angular
           return $http.put(PATHS.USERS + '/' + params.user._id, params.user);
         },
         delete: function (params) {
-          return $http.delete(PATHS.USERS + '/' + (params._id || params.id));
-        },
-        getTpByModule: function (params) {
-          return $http.get(PATHS.USERS + '/' + params._id, {
-            params: params
-          });
+          return $http.delete(PATHS.USERS + '/' + params._id);
         }
       };
     }

@@ -1,35 +1,7 @@
 @import "modules/core/client/css/variables";
-.header-container {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #fff;
-  height: 45px;
-  background-color: #fff;
-  margin-bottom: 1em;
-  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2);
-  border-radius: 2px;
-  &.show {
-    display: block;
-  }
-  .sos-logo img {
-    width: 32px;
-    margin: 6px 0 0;
-  }
-  .btn {
-    font-weight: bold;
-    margin: 5px 20px 0 0;
-    color: #444;
-  }
-  .fa {
-    color: red;
-  }
-}
 .dashboard-page {
   position: absolute;
-  top: 50px;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -81,15 +53,15 @@
   }
   @media (min-width: 768px) {
     .sidebar {
-      position: absolute;
+      position: fixed;
       top: 0;
       bottom: 0;
       left: 0;
       z-index: 1000;
       display: block;
       padding: 0 20px 20px;
-      overflow-x: hidden;
-      overflow-y: auto;
+      //overflow-x: hidden;
+      //overflow-y: auto;
       /* Scrollable contents if viewport is shorter than content. */
       //box-shadow: 0 0 2px 0 rgba(0,0,0,0.2);
     }
@@ -99,7 +71,7 @@
     transition: all 0.25s;
     color: #fff;
     background-color: @brand-primary;
-    .fa {
+    .icon {
       color: #fff;
     }
   }
@@ -114,11 +86,14 @@
   .nav-sidebar > li > a {
     color: #999;
     font-weight: 500;
-    padding: 0;
     font-size: 0.85em;
     border-bottom: 1px solid #E9E9E9;
     font-size: 14px;
-    .fa {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 0;
+    padding-left: 4px;
+    .icon {
       color: #999;
       padding: 10px;
       width: 30px;
@@ -131,7 +106,7 @@
     border-radius: 0 3px 3px 0;
     color: #fff;
     background-color: @brand-primary;
-    .fa {
+    .icon {
       color: #fff;
     }
   }
@@ -139,12 +114,13 @@
      * Main content
      */
   .main {
-    padding: 20px 20px 40px;
+    padding: 20px;
     position: absolute;
     top: 0;
     bottom: 0;
     overflow-x: hidden;
     overflow-y: auto;
+    padding-bottom: 75px;
     .jumbotron {
       background: #FFF;
       margin-top: 20px;
@@ -205,7 +181,7 @@
     right: -100px;
     top: 200px;
   }
-  .sos-logo {
+  .ch-logo {
     width: 100%;
     position: absolute;
     bottom: 5px;
@@ -225,9 +201,8 @@ footer {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 40px;
-  padding: 10px;
+  height: 50px;
+  padding: 15px;
   background: #efefef;
   border-top: 1px solid #ddd;
-  font-size: 12px;
 }

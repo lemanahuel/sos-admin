@@ -3,7 +3,7 @@
 'use strict';
 
 window.sup = function () {
-  console['log']('%c¯\\_(ツ)_/¯, by %c@Coderhouse %cFull Stack Team', 'color: #fff;', 'color: #14a081;', 'color: #fff;');
+  console['log']('¯\\_(ツ)_/¯, by Coderhouse Full Stack Team');
 };
 
 //Start by defining the main module and adding the module dependencies

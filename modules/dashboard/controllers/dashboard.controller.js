@@ -2,44 +2,48 @@
 
 angular
   .module('dashboard')
-  .controller('DashboardController', ['$scope', '$state', '$rootScope', 'ProfilesSrv',
-    function ($scope, $state, $rootScope, ProfilesSrv) {
-      var vm = this;
-      vm.user = $rootScope.USER;
-      vm.profile = $rootScope.PROFILE || $rootScope.AUTH_PROFILE;
+  .controller('DashboardController', ['Authenticated', '$scope', '$state', '$rootScope',
+    function(Authenticated, $scope, $state, $rootScope) {
       $scope.$state = $state;
+      var vm = this;
+      $rootScope.PERMISSIONS = $rootScope.PERMISSIONS || {};
+      vm.navItems = [{
+        title: 'Centros',
+        state: 'capacitation-center',
+        permissions: true
+      }, {
+        title: 'Voluntarios',
+        state: 'volunteers',
+        permissions: true
+      }];
 
-      if (vm.profile.avatar) {
-        vm.currentPicture = vm.profile.avatar;
-      } else if ($rootScope.AUTH_PROFILE.picture) {
-        vm.currentPicture = $rootScope.AUTH_PROFILE.picture;
-      } else {
-        vm.currentPicture = 'modules/core/client/img/sos-icon.ico';
+      vm.isCollapsed = [];
+      vm.navItems.forEach(function(element, index, array) {
+        vm.isCollapsed[index] = false;
+      });
+
+      vm.closeCollapsed = function() {
+        vm.isCollapsed.forEach(function(element, index, array) {
+          vm.isCollapsed[index] = false;
+        });
       }
 
-      (function () {
-        var qs, js, q, s, d = document,
-          gi = d.getElementById,
-          ce = d.createElement,
-          gt = d.getElementsByTagName,
-          id = 'typef_orm',
-          b = 'https://s3-eu-west-1.amazonaws.com/share.typeform.com/';
-        if (!gi.call(d, id)) {
-          js = ce.call(d, 'script');
-          js.id = id;
-          js.src = b + 'share.js';
-          q = gt.call(d, 'script')[0];
-          q.parentNode.insertBefore(js, q);
+      vm.onClickCollpase = function(index) {
+        if (!vm.isCollapsed[index]) {
+          vm.closeCollapsed();
+          vm.isCollapsed[index] = true;
+        } else {
+          vm.closeCollapsed();
         }
-        id = id + '_';
-        if (!gi.call(d, id)) {
-          qs = ce.call(d, 'link');
-          qs.rel = 'stylesheet';
-          qs.id = id;
-          qs.href = b + 'share-button.css';
-          s = gt.call(d, 'head')[0];
-          s.appendChild(qs, s);
-        }
-      })();
+      };
+
+      if (!Authenticated) {
+        $state.go('login');
+        return;
+      }
+
+      if ($state.is('login') || $state.is('dashboard')) {
+        $state.go('capacitation-centers');
+      }
     }
   ]);

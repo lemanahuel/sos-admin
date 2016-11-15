@@ -1,28 +1,22 @@
 /* eslint angular/window-service: 0 */
 'use strict';
 
-window.APP = (function () {
-  var NAME = 'SOS-ADMIN';
+window.APP = (function() {
+  var NAME = 'CH-DASH';
 
   return {
     NAME: NAME,
     DEPENDENCIES: [
       'angular-loading-bar',
       'ui.router',
+      'satellizer',
       'ui.bootstrap',
       'ngFileUpload',
-      'ngCookies',
-      'angular-storage',
-      'angular-jwt',
-      'auth0',
-      'ngSanitize',
       'ui-notification',
-      'as.sortable',
       'google.places',
-      'ui.codemirror',
-      'btford.markdown'
+      'ngAnimate'
     ],
-    ADD_MODULE: function (moduleName, dependencies) {
+    ADD_MODULE: function(moduleName, dependencies) {
       angular.module(moduleName, dependencies || []);
       angular.module(NAME).requires.push(moduleName);
     }

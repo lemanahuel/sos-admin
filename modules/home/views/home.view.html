@@ -1,0 +1,174 @@
+<div class="home-container listing-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="section-title">
+          <b>En los proximos dias:</b>
+        </h2>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <br/>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Paises</label>
+          <select class="form-control" ng-model="vm.currentCountry" ng-change="vm.onChangeCountry()">
+            <option value="">Todos</option>
+            <option value="ar">Argentina</option>
+            <option value="cl">Chile</option>
+            <option value="uy">Uruguay</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Carreras</label>
+          <select class="form-control" ng-model="vm.currentCareer" ng-change="vm.onChangeCareer()">
+            <option value="">Todos</option>
+            <option ng-repeat="item in vm.careers | orderBy: 'id_career'" value="{{::item.id_career}}" ng-bind="::item.title"></option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Cursos</label>
+          <select class="form-control" ng-model="vm.currentLevel" ng-change="vm.onChangeLevel()">
+            <option value="">Todos</option>
+            <option value="0">Completo</option>
+            <option ng-repeat="item in vm.levels | filter: {
+              id_career: vm.currentCareer
+            } | orderBy: 'id_level'" value="{{item.id_level}}" ng-bind="item.title"></option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <br/>
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="section-title">
+          <b>Cursos</b>
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <br/>
+    <div class="row" ng-if="vm.courses.length">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th width="5%" ng-click="vm.onClickOrderBy('camada.id')">Camada</th>
+                <th ng-click="vm.onClickOrderBy('level.title')">Curso</th>
+                <th ng-click="vm.onClickOrderBy('startDate')">Comienza y Termina</th>
+                <th ng-click="vm.onClickOrderBy('days')">Dias</th>
+                <th ng-click="vm.onClickOrderBy('hours')">Horario</th>
+                <th width="5%" class="text-center" ng-click="vm.onClickOrderBy('country')">Pais</th>
+                <th width="5%" class="text-center">Cowork</th>
+                <th width="5%" class="text-center">Profesor</th>
+                <th width="5%" class="text-center" ng-click="vm.onClickOrderBy('soldOut')">SoldOut</th>
+                <!-- <th ng-if="::!PERMISSIONS.reader" class="text-center"><i class="icon glyphicon glyphicon-remove"></i></th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in vm.courses
+                  | filter: {
+                    country: vm.currentCountry,
+                    id_career: vm.currentCareer,
+                    id_level: vm.currentLevel
+                  }
+                  | orderBy : vm.currentOrder track by $index" id="{{item._id}}" ng-click="vm.onClickEdit($event, item._id)" ng-class="{'pending': item.pending}">
+                <td ng-bind="item.camada.id"></td>
+                <td ng-if="item.level" ng-bind="vm.getAcronim(item.career) + item.level.subtitle"></td>
+                <td ng-if="!item.level" ng-bind="vm.getAcronim(item.career) + 'Completo'"></td>
+                <td ng-bind="(item.startDate | date:'dd/MM/yyyy') + ' - ' + (item.endDate | date:'dd/MM/yyyy')"></td>
+                <td ng-bind="vm.getDays(item)"></td>
+                <td ng-bind="item.startHour ? (item.startHour | date:'HH:mm')+' - '+(item.endHour | date:'HH:mm') : item.hours"></td>
+                <td class="text-center" ng-bind="item.country | uppercase"></td>
+                <td class="text-center">
+                  <i ng-if="item.coworking" class="fa fa-check"></i>
+                </td>
+                <td class="text-center">
+                  <i ng-if="item.camada.teachers.length" class="fa fa-check"></i>
+                </td>
+                <td class="text-center">
+                  <i ng-if="item.soldOut" class="fa fa-check"></i>
+                </td>
+                <!-- <td ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickRemove($event, item._id)" class="btn-delete text-center">
+                  <i class="icon glyphicon glyphicon-remove"></i>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-if="!vm.courses.length">
+      <div class="col-md-12">
+        <p>No hay cursos...</p>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <br/>
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="section-title">
+          <b>Workshops y Eventos</b>
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid  workshops-container">
+    <br/>
+    <div class="row" ng-if="vm.workshops.length">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th width="10%">Logo</th>
+                <th width="25%" ng-click="vm.onClickOrderBy('title')">Titulo</th>
+                <th ng-click="vm.onClickOrderBy('tecnology')">Tecnologia</th>
+                <th ng-click="vm.onClickOrderBy('date')">Fecha</th>
+                <th ng-click="vm.onClickOrderBy('country')">Pais</th>
+                <th ng-click="vm.onClickOrderBy('type')">Tipo</th>
+                <th class="text-center" ng-click="vm.onClickOrderBy('published')">Publicado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in vm.workshops
+                | filter: {
+                  country: vm.currentCountry
+                }
+                | orderBy : vm.currentWorkhopsOrder
+                | limitTo: 20
+                track by item._id" id="{{item._id}}" ui-sref="workshop({id: item._id})">
+                <td>
+                  <img ng-src="{{item.logo}}" />
+                </td>
+                <td ng-bind="item.title"></td>
+                <td ng-bind="item.tecnology"></td>
+                <td ng-bind="item.date | date:'dd/MM/yyyy'"></td>
+                <td ng-bind="item.country | uppercase"></td>
+                <td ng-bind="item.type"></td>
+                <td class="text-center">
+                  <i ng-if="item.published" class="icon glyphicon glyphicon-ok"></i>
+                </td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-if="!vm.workshops.length">
+      <div class="col-md-12">
+        <p>No hay ninguno...</p>
+      </div>
+    </div>
+  </div>
+</div>

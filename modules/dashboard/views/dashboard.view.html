@@ -1,56 +1,31 @@
-<div class="header-container" ng-class="{'show': vm.user._id}">
-  <div class="row">
-    <div class="col-xs-4">
-    </div>
-    <div class="col-xs-4 text-center">
-      <a class="sos-logo" ui-sref="profile({userId: vm.user._id})"><img src="https://res.cloudinary.com/hdsqazxtw/image/upload/c_scale,w_50/v1468852553/coderhouse-icon_pzt0g0.png" alt="Coderhouse"></a>
-    </div>
-    <div class="col-xs-4">
-      <div class="pull-right">
-        <a class="btn typeform-share" href="https://coderhouse.typeform.com/to/Bmo8WT" data-mode="1" target="_blank"> <i class="fa fa-heart"></i> Referir a un amigo</a>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="dashboard-page dashboard-container">
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-12 col-sm-2 col-md-2 col-lg-1 sidebar">
-        <div class="text-center">
-          <h2 ui-sref="profile({userId: vm.user._id})" class="brand">
-            <img ng-src="{{vm.currentPicture}}" alt="Coderhouse" />
-          </h2>
-        </div>
         <ul class="nav nav-sidebar">
-          <li ng-class="{active: $state.is('camadas') || $state.is('camada') || $state.is('camada-new')}">
-            <a ui-sref="camadas" title="Camadas"><i class="fa fa-users"></i> Camadas</a>
-          </li>
-          <li ng-class="{active: $state.is('schedules') || $state.is('schedule') || $state.is('schedule-new')}">
-            <a ui-sref="schedules" title="Agenda"><i class="fa fa-calendar"></i> Agenda</a>
-          </li>
-          <li ng-class="{active: $state.is('classes') || $state.is('class') || $state.is('class-new') || $state.is('stages') || $state.is('stage') || $state.is('stage-new') || $state.is('modules') || $state.is('module') || $state.is('module-new')}">
-            <a ui-sref="classes" title="Cursos"><i class="fa fa-book"></i> Cursos</a>
-          </li>
-          <li ng-class="{active: $state.is('tps') || $state.is('tp') || $state.is('tp-new')}">
-            <a ui-sref="tps" title="Tps"><i class="fa fa-file-code-o"></i> TPs</a>
-          </li>
-          <li ng-if="::PERMISSIONS.remote" ng-class="{active: $state.is('remotes') || $state.is('remote') || $state.is('remote-new') || $state.is('remote-live')}">
-            <a ui-sref="remotes" title="Remoto"><i class="fa fa-video-camera"></i> Remoto</a>
+          <li ng-if="::item.permissions" ng-repeat="item in ::vm.navItems" ng-class="{active: $state.is(item.state) }">
+            <a ng-if="!item.items" ui-sref="{{item.state}}" ng-click="vm.closeCollapsed()" ng-bind="item.title"></a>
+            <a ng-if="item.items" class="dropdown-toggle" ng-click="vm.onClickCollpase($index)" role="button" aria-haspopup="true" aria-expanded="false">
+                {{item.title}}
+                <span class="caret"></span>
+            </a>
+            <div ng-if="item.items" class="dropdown-menu" ng-show="vm.isCollapsed[$index]" style="display: block;">
+              <div class="row">
+                <ul class="nav nav-sidebar" style="margin: 0;padding: 0 19px;">
+                  <li ng-repeat="subItem in ::item.items" ng-class="{active: $state.is(subItem.state) }">
+                    <a ui-sref="{{subItem.state}}" ng-click="vm.closeCollapsed()" ng-bind="subItem.title"></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </li>
           <li>
-            <a ui-sref="logout" title="Salir"><i class="fa fa-sign-out"></i> Salir</a>
+            <a ui-sref="logout">Salir</a>
           </li>
         </ul>
-        <!-- <a class="sos-logo" href="https://www.coderhouse.com" target="_blank"><img src="modules/core/client/img/sos-icon.ico" alt="Coderhouse" /> Coderhouse</a> -->
+        <a class="ch-logo" href="https://www.coderhouse.com" target="_blank"><img src="modules/core/client/img/ch-icon.ico" alt="Coderhouse" /> Coderhouse</a>
       </div>
-      <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 col-lg-11 col-lg-offset-1 main" ui-view style="padding:0"></div>
-      <footer class="row">
-        <div class="inner">
-          <p class="derechos col-md-6">
-            <small>© 2016 Coderhouse, todos los derechos reservados. <a href="https://www.coderhouse.com/legal" target="_blank">Términos y Condiciones</a></small>
-          </p>
-        </div>
-      </footer>
+      <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 col-lg-11 col-lg-offset-1 main" ui-view></div>
     </div>
   </div>
 </div>

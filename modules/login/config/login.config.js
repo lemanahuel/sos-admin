@@ -10,13 +10,26 @@ angular
           templateUrl: 'modules/login/views/login.view.html',
           controller: 'LoginController',
           controllerAs: 'vm',
-          resolve: {}
+          resolve: {
+            Authenticated: ['$auth',
+              function($auth) {
+                console.log('authenticated', $auth);
+                return $auth.isAuthenticated();
+              }
+            ]
+          }
         })
         .state('logout', {
           url: '/logout',
           controller: 'LogoutController',
           controllerAs: 'vm',
-          resolve: {}
+          resolve: {
+            logout: ['$auth',
+              function($auth) {
+                return $auth.logout();
+              }
+            ]
+          }
         });
     }
   ]);

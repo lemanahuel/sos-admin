@@ -2,10 +2,11 @@
 
 angular
   .module('login')
-  .controller('LogoutController', ['$state', 'auth', 'SessionSrv',
-    function($state, auth, SessionSrv) {
-      auth.signout();
+  .controller('LogoutController', ['$state', 'SessionSrv',
+    function($state, SessionSrv) {
       SessionSrv.delete();
-      $state.go('login');
+      $state.go('login', {
+        reload: true
+      });
     }
   ]);

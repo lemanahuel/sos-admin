@@ -6,11 +6,17 @@ angular
     function($stateProvider) {
       $stateProvider
         .state('dashboard', {
-          url: '/dash',
+          url: '',
           templateUrl: 'modules/dashboard/views/dashboard.view.html',
           controller: 'DashboardController',
           controllerAs: 'vm',
-          resolve: {}
+          resolve: {
+            Authenticated: ['$auth',
+              function($auth) {
+                return $auth.isAuthenticated();
+              }
+            ]
+          }
         });
     }
   ]);

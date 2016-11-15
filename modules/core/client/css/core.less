@@ -1,19 +1,17 @@
 @import "variables";
 html {
-  -ms-tousos-action: manipulation;
-  tousos-action: manipulation;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
 }
 body,
 html {
   background-color: rgb(243, 243, 243);
   font-family: Raleway, Helvetica, Arial, sans-serif;
 }
-//@import "less/bootstrap.less";
-//@import "base.less";
-//@import "pages/login.less";
-//@import "pages/dashboard.less";
-//@import "widgets/input-underline.less"; //@import "transitions/all.less";
-// Other
+pre {
+  font-family: Raleway, Helvetica, Arial, sans-serif;
+  word-wrap: break-word;
+}
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -69,7 +67,7 @@ select {
     font-weight: bold;
     vertical-align: middle !important;
   }
-  .btn-delete .fa {
+  .btn-delete .icon {
     display: none;
   }
   td,
@@ -79,18 +77,18 @@ select {
       cursor: pointer;
     }
     &:hover {
-      .btn-delete .fa {
+      .btn-delete .icon {
         display: inline-block;
       }
     }
   }
 }
 .table {
-   > tbody,
+   > tfoot,
    > thead,
-  > tfoot {
-     > tr > td,
-    > tr > th {
+  > tbody {
+     > tr > th,
+    > tr > td {
       padding: 8px 6px;
     }
   }
@@ -168,17 +166,55 @@ div[ui-markdown-editor-opts] {
     border: 1px solid #ccc;
   }
 }
-.ui-notification {
-  border-radius: 2px;
-  box-shadow: none;
-  &.error {
-    color: #dd191d;
-    background-color: #f9bdbb;
-    border: 1px solid #e84e40 !important;
+.help-text {
+  font-size: 10px;
+}
+.disabled {
+  opacity: 0.50;
+  cursor: auto !important;
+}
+.pending {
+  background-color: #fe6b6b;
+  color: #000;
+  &:hover {
+    background-color: #e53a3a !important;
+    color: #fff;
   }
-  &.success {
-    color: #7cb342;
-    background-color: #dcedc8;
-    border: 1px solid #9ccc65 !important;
+}
+hr {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+[uib-popover] {
+  cursor: pointer;
+}
+
+.table {
+  tr th {
+    border-bottom: 0 !important;
+    background: transparent;
+    color: #333;
+    font-weight: bold;
+    vertical-align: middle !important;
+  }
+
+  .btn-delete .fa {
+    display: none;
+  }
+
+  td,
+  th,
+  tr {
+    &[ng-click] {
+      cursor: pointer;
+    }
+
+    &:hover {
+      .btn-delete .fa {
+        display: inline-block;
+      }
+    }
   }
 }

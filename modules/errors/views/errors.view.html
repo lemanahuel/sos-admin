@@ -1,0 +1,24 @@
+<div class="show-container errors-container">
+  <section layout="row" layout-align="center">
+    <article flex flex-sm="95" layout-gt-sm="row" layout-align="center">
+      <div ng-if="!$root.IS_MOBILE" flex="30" flex-sm="100" class="img-container">
+        <img src="modules/core/client/img/brujula-error-page.png" alt="error" title="error" />
+      </div>
+      <div flex="70" flex-sm="100">
+        <div layout="column">
+          <div layout="column">
+            <h1 class="content-title" flex>Error</h1>
+            <h2 class="content-subtitle" flex>¡El contenido que intentas reproducir no existe o no se encuentra disponible!</h2>
+          </div>
+          <div layout="row">
+            <p flex-sm="95">Te recomendamos más contenido que quizás te pueda interesar.</p>
+          </div>
+          <ch-card-list-videos list="vm.videosList"></ch-card-list-videos>
+        </div>
+        <div layout="row" layout-margin layout-align="end end">
+          <md-button flex-sm="100" class="md-raised ch-btn" href="/" translate-once="btns.showMore"></md-button>
+        </div>
+      </div>
+    </article>
+  </section>
+</div>
