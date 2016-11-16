@@ -1,8 +1,8 @@
 'use strict';
 
 angular
-  .module('io-users')
-  .controller('IOUserController', ['IOUser', 'Careers', 'Levels', 'UsersSrv', 'ModalSrv', '$state', '$scope', 'NotificationsSrv', 'ROLES', 'TEACHER_STATUS', 'TEACHER_ROLE', 'TEACHER_MODALITY', 'COURSES_COLORS', 'COURSES_LOGOS', 'DAYS', '$rootScope',
+  .module('capacitation-centers')
+  .controller('CapacitationCenterController', ['IOUser', 'Careers', 'Levels', 'UsersSrv', 'ModalSrv', '$state', '$scope', 'NotificationsSrv', 'ROLES', 'TEACHER_STATUS', 'TEACHER_ROLE', 'TEACHER_MODALITY', 'COURSES_COLORS', 'COURSES_LOGOS', 'DAYS', '$rootScope',
     function(IOUser, Careers, Levels, UsersSrv, ModalSrv, $state, $scope, NotificationsSrv, ROLES, TEACHER_STATUS, TEACHER_ROLE, TEACHER_MODALITY, COURSES_COLORS, COURSES_LOGOS, DAYS, $rootScope) {
       var vm = this;
       vm.roles = ROLES;
@@ -231,13 +231,13 @@ angular
 
       vm.onClickBlock = function() {
         ModalSrv.open({
-          url: 'modules/io-users/views/io-user.remove.view.html',
+          url: 'modules/capacitation-centers/views/io-user.remove.view.html',
           confirm: function() {
             UsersSrv.delete({
               _id: vm.ioUserTmp._id
             }).then(function() {
               NotificationsSrv.removed();
-              $state.go('io-users');
+              $state.go('capacitation-centers');
             }, function(err) {
               NotificationsSrv.error();
               console.debug(err);

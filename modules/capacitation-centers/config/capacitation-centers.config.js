@@ -19,11 +19,11 @@ angular
             ]
           }
         })
-        .state('capacitation-centers-new', {
+        .state('capacitation-center-new', {
           url: '/capacitation-centers/nuevo',
           parent: 'dashboard',
           templateUrl: 'modules/capacitation-centers/views/io-user.view.html',
-          controller: 'IOUserController',
+          controller: 'CapacitationCenterController',
           controllerAs: 'vm',
           resolve: {
             CapacitationCenter: [function() {
@@ -35,7 +35,7 @@ angular
           url: '/capacitation-centers/:id',
           parent: 'dashboard',
           templateUrl: 'modules/capacitation-centers/views/io-user.view.html',
-          controller: 'IOUserController',
+          controller: 'CapacitationCenterController',
           controllerAs: 'vm',
           resolve: {
             CapacitationCenter: ['CapacitationCentersSrv', '$stateParams',

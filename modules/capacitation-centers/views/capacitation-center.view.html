@@ -474,7 +474,7 @@
             <div class="btn-group" role="group">
               <button type="button" ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickBlock($event)" class="btn btn-link" ng-show="vm.ioUserTmp._id && vm.ioUserTmp.enable">Bloquear</button>
               <button type="button" ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickUnblock($event)" class="btn btn-link" ng-show="vm.ioUserTmp._id && !vm.ioUserTmp.enable">Desbloquear</button>
-              <button type="button" ui-sref="io-users" class="btn  btn-default">Cancelar</button>
+              <button type="button" ui-sref="capacitation-centers" class="btn  btn-default">Cancelar</button>
             </div>
             <button type="submit" ng-if="::!PERMISSIONS.reader" class="btn btn-primary pull-right">Guardar</button>
           </div>

@@ -1,13 +1,14 @@
 'use strict';
 
 angular
-  .module('io-users')
+  .module('capacitation-centers')
   .controller('CapacitationCentersController', ['CapacitationCenters', 'ModalSrv', 'CapacitationCentersSrv', '$state',
     function(CapacitationCenters, ModalSrv, CapacitationCentersSrv, $state) {
       var vm = this;
 
       function setCurrents(items) {
         vm.capacitationCenters = items && items.data;
+        console.log(vm.capacitationCenters)
       }
 
       setCurrents(CapacitationCenters);
@@ -39,7 +40,7 @@ angular
         };
 
         ModalSrv.open({
-          url: '/modules/capacitation-centers/views/capacitation-centers.remove.view.html',
+          url: 'modules/capacitation-centers/views/capacitation-center.remove.view.html',
           confirm: function() {
             findAndRemove(id);
           }
