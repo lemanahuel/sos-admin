@@ -22,7 +22,7 @@ angular
         .state('capacitation-center-new', {
           url: '/capacitation-centers/nuevo',
           parent: 'dashboard',
-          templateUrl: 'modules/capacitation-centers/views/io-user.view.html',
+          templateUrl: 'modules/capacitation-centers/views/capacitation-center.view.html',
           controller: 'CapacitationCenterController',
           controllerAs: 'vm',
           resolve: {
@@ -34,7 +34,7 @@ angular
         .state('capacitation-center', {
           url: '/capacitation-centers/:id',
           parent: 'dashboard',
-          templateUrl: 'modules/capacitation-centers/views/io-user.view.html',
+          templateUrl: 'modules/capacitation-centers/views/capacitation-center.view.html',
           controller: 'CapacitationCenterController',
           controllerAs: 'vm',
           resolve: {

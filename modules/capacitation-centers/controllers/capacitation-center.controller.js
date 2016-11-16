@@ -2,8 +2,8 @@
 
 angular
   .module('capacitation-centers')
-  .controller('CapacitationCenterController', ['IOUser', 'Careers', 'Levels', 'UsersSrv', 'ModalSrv', '$state', '$scope', 'NotificationsSrv', 'ROLES', 'TEACHER_STATUS', 'TEACHER_ROLE', 'TEACHER_MODALITY', 'COURSES_COLORS', 'COURSES_LOGOS', 'DAYS', '$rootScope',
-    function(IOUser, Careers, Levels, UsersSrv, ModalSrv, $state, $scope, NotificationsSrv, ROLES, TEACHER_STATUS, TEACHER_ROLE, TEACHER_MODALITY, COURSES_COLORS, COURSES_LOGOS, DAYS, $rootScope) {
+  .controller('CapacitationCenterController', ['CapacitationCenter', 'Careers', 'Levels', 'UsersSrv', 'ModalSrv', '$state', '$scope', 'NotificationsSrv', 'ROLES', 'TEACHER_STATUS', 'TEACHER_ROLE', 'TEACHER_MODALITY', 'COURSES_COLORS', 'COURSES_LOGOS', 'DAYS', '$rootScope',
+    function(CapacitationCenter, Careers, Levels, UsersSrv, ModalSrv, $state, $scope, NotificationsSrv, ROLES, TEACHER_STATUS, TEACHER_ROLE, TEACHER_MODALITY, COURSES_COLORS, COURSES_LOGOS, DAYS, $rootScope) {
       var vm = this;
       vm.roles = ROLES;
       vm.teacherRole = TEACHER_ROLE;
