@@ -58,11 +58,8 @@ module.exports.initMiddleware = (app) => {
   // Initialize favicon middleware
   app.use(favicon('./modules/core/client/img/ch-icon.ico'));
 
-  app.use(helpers.unforceWww);
+  //app.use(helpers.unforceWww);
   //app.use(helpers.forceHttps);
-  //app.use(helpers.legacyApiProxy);
-  //app.use(helpers.redirectUpperCase);
-  //app.use(helpers.interceptFacebookMeta);
 
   // Environment dependent middleware
   if (process.env.NODE_ENV === 'development') {

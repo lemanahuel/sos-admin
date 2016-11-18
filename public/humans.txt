@@ -2,7 +2,7 @@
 # The humans responsible & technology colophon
 
 /* TEAM */
-	The Coderhouse Team
+	The VoluntarioSOS Team
 	Contact: hola@voluntariosos.com
 
 # TECHNOLOGY COLOPHON

@@ -2,9 +2,9 @@
 
 module.exports = {
   app: {
-    site: 'http://voluntariosos.io',
-    title: 'Coderhouse | Cursos de Programación, Marketing y Diseño',
-    description: 'Escuela de Programación Web y Mobile, Diseño UX y Marketing Online. Cursos presenciales y remotos.',
+    site: 'https://admin.voluntariosos.org',
+    title: 'VoluntarioSOS | Admin',
+    description: '',
     keywords: '',
     googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID'
   },
