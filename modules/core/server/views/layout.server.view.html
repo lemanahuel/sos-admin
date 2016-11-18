@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 
-  <head>
-    <title>{{app.title}}</title>
-    <!-- General META -->
-    <meta name="robots" content="noindex, nofollow"/>
-    <meta charset="utf-8" />
-    <meta name="fragment" content="!" />
-    <base href="/" />
-    <link rel="shortcut icon" type="image/x-icon" href="modules/core/client/img/ch-icon.ico" />
-    <!-- Responsive META -->
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <!-- Chrome, Firefox OS, Opera and Vivaldi -->
-    <meta name="theme-color" content="#69C0AC" />
-    <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#69C0AC" />
-    <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="#69C0AC" />
-    <!--Application CSS Files-->
-    {% for cssFile in cssFiles %}
-    <link rel="stylesheet" href="{{cssFile}}" /> {% endfor %}
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAqsGIDVWUzRGwDQ5zVzpyXeXLhFPRFRGo"></script>
-  </head>
+<head>
+  <title>{{app.title}}</title>
+  <!-- General META -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta charset="utf-8" />
+  <meta name="fragment" content="!" />
+  <base href="/" />
+  <link rel="shortcut icon" type="image/x-icon" href="modules/core/client/img/sos-icon.ico" />
+  <!-- Responsive META -->
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <!-- Chrome, Firefox OS, Opera and Vivaldi -->
+  <meta name="theme-color" content="#69C0AC" />
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#69C0AC" />
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="#69C0AC" />
+  <!--Application CSS Files-->
+  {% for cssFile in cssFiles %}
+  <link rel="stylesheet" href="{{cssFile}}" /> {% endfor %}
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAqsGIDVWUzRGwDQ5zVzpyXeXLhFPRFRGo"></script>
+</head>
 
-  <body>
-    <div class="container">
-      <div ui-view></div>
-    </div>
-    {% for jsFile in jsFiles %}
-    <script type="text/javascript" src="{{jsFile}}"></script>
-    {% endfor %}
-  </body>
+<body>
+  <div class="container">
+    <div ui-view></div>
+  </div>
+  {% for jsFile in jsFiles %}
+  <script type="text/javascript" src="{{jsFile}}"></script>
+  {% endfor %}
+</body>
 
 </html>

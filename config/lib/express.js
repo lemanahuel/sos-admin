@@ -56,7 +56,7 @@ module.exports.initMiddleware = (app) => {
   app.use(compress());
 
   // Initialize favicon middleware
-  app.use(favicon('./modules/core/client/img/ch-icon.ico'));
+  app.use(favicon('./modules/core/client/img/sos-icon.ico'));
 
   //app.use(helpers.unforceWww);
   //app.use(helpers.forceHttps);
