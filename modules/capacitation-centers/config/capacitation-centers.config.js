@@ -6,7 +6,7 @@ angular
     function($stateProvider) {
       $stateProvider
         .state('capacitation-centers', {
-          url: '/capacitation-centers',
+          url: '/centros',
           parent: 'dashboard',
           templateUrl: 'modules/capacitation-centers/views/capacitation-centers.view.html',
           controller: 'CapacitationCentersController',
@@ -20,7 +20,7 @@ angular
           }
         })
         .state('capacitation-center-new', {
-          url: '/capacitation-centers/nuevo',
+          url: '/centros/nuevo',
           parent: 'dashboard',
           templateUrl: 'modules/capacitation-centers/views/capacitation-center.view.html',
           controller: 'CapacitationCenterController',
@@ -32,7 +32,7 @@ angular
           }
         })
         .state('capacitation-center', {
-          url: '/capacitation-centers/:id',
+          url: '/centros/:id',
           parent: 'dashboard',
           templateUrl: 'modules/capacitation-centers/views/capacitation-center.view.html',
           controller: 'CapacitationCenterController',

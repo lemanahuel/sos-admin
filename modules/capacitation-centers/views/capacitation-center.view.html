@@ -1,485 +1,150 @@
 <div class="io-user-container">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6">
-        <h2 class="section-title" ng-if="vm.ioUserTmp._id">IO User</h2>
-        <h2 class="section-title" ng-if="!vm.ioUserTmp._id">IOUser /
-          <b>Nuevo</b>
-        </h2>
-      </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="section-title" ng-if="vm.capacitationCenterTmp._id">Centro / {{vm.capacitationCenterTmp.name}}</h2>
+                <h2 class="section-title" ng-if="!vm.capacitationCenterTmp._id">Centros /
+                    <b>Nuevo</b>
+                </h2>
+            </div>
+        </div>
     </div>
-  </div>
-  <br/>
-  <div class="container-fluid">
-    <form class="row" ng-submit="vm.onSubmit()">
-      <div class="col-md-12 form-content">
-        <div class="row">
-          <div class="col-md-12">
-            <h4>Informacion basica</h4>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-8">
-            <div class="row">
-              <div class="form-group col-md-6">
-                <label>Nombre</label>
-                <input required type="text" class="form-control" ng-model="vm.ioUserTmp.profile.first_name" />
-              </div>
-              <div class="form-group col-md-6">
-                <label>Apellido</label>
-                <input required type="text" class="form-control" ng-model="vm.ioUserTmp.profile.last_name" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6 form-group">
-                <label>Rol</label>
-                <select required class="form-control" ng-model="vm.ioUserTmp.role" ng-change="vm.onChangeRole()">
-                  <option value="">Selecciona</option>
-                  <option ng-repeat="(key, value) in vm.roles track by $index" value="{{key}}" ng-bind="value"></option>
-                </select>
-              </div>
-              <div class="col-md-6 form-group">
-                <label>Email</label>
-                <div class="input-group">
-                  <input required type="email" class="form-control" ng-model="vm.ioUserTmp.email" />
-                  <span class="input-group-addon">
-                    <i ng-if="::vm.ioUserTmp.email_Verified" class="fa fa-check" title="Verificado"></i>
-                    <i ng-if="::!vm.ioUserTmp.email_Verified">No verificado</i>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="row" ng-if="vm.isTeacher">
-              <div class="col-md-6 form-group">
-                <label>Modalidad de profesor</label>
-                <select class="form-control" ng-model="vm.ioUserTmp.profile.teacherModality">
-                  <option value="">Selecciona</option>
-                  <option ng-repeat="(key, value) in vm.teacherModality track by $index" value="{{key}}" ng-bind="value"></option>
-                </select>
-              </div>
-              <div class="col-md-6 form-group">
-                <label>Curso de profesor</label>
-                <select class="form-control" ng-model="vm.ioUserTmp.profile.teacherRole">
-                  <option value="">Selecciona</option>
-                  <option ng-repeat="(key, value) in vm.teacherRole track by $index" value="{{key}}" ng-bind="value"></option>
-                </select>
-              </div>
-            </div>
-            <div class="row" ng-if="vm.isTeacher">
-              <div class="col-md-6 form-group">
-                <label>Precio por Hora ($)</label>
-                <input type="number" class="form-control" ng-model="vm.ioUserTmp.profile.rate" />
-              </div>
-              <div class="col-md-6 form-group">
-                <br>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" ng-model="vm.ioUserTmp.profile.prevExperience"> Experiencia previa
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="row">
-              <div class="col-md-12 form-group" ng-if="vm.isTeacher">
-                <label>Estado</label>
-                <select class="form-control" ng-model="vm.currentStatus" ng-change="vm.onChangeFilter()">
-                  <option value="">Todos</option>
-                  <option ng-repeat="item in vm.teacherStatus | orderBy:'value' track by $index" value="{{item.key}}" ng-bind="item.value"></option>
-                </select>
-              </div>
-              <div class="col-md-12 form-group">
-                <div class="form-group">
-                  <label>Comentarios</label>
-                  <textarea class="form-control" rows="5" ng-model="vm.ioUserTmp.comment"></textarea>
-                </div>
-              </div>
-              <div class="col-md-12 form-group">
-                <label for="">Url al video con la entrevista</label>
-                <input type="text" class="form-control" ng-model="vm.ioUserTmp.profile.teacherVideoInterviewUrl">
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr>
-        <div class="row" ng-if="vm.isTeacher">
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col-md-12">
-                <h4>Cursos que puede dar</h4>
-              </div>
-              <div class="form-group col-md-3">
-                <label for="">Cursos</label>
-                <div class="input-group">
-                  <select class="form-control" ng-model="vm.id_level" ng-disabled="::PERMISSIONS.reader">
-                <option value="">Seleccionar</option>
-                <option ng-repeat="item in vm.levels | orderBy: 'id_career' track by $index" value="{{item._id}}" ng-bind="item.title"></option>
-              </select>
-                  <div class="input-group-btn">
-                    <button ng-if="::!PERMISSIONS.reader" class="btn btn-primary pull-left" ng-click="vm.onClickCanTeach($event)">Agregar</button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group col-md-3">
-                <label>&nbsp;</label>
-                <ul class="list-group">
-                  <li class="list-group-item" ng-repeat="level in vm.levels | orderBy: 'title' track by $index" ng-show="vm.ioUserTmp.profile.canTeach.indexOf(level._id) > -1">
-                    <span ng-bind="level.title"></span>
-                    <span ng-click="vm.onClickRemoveCanTeach($event, level._id)" class="pull-right"><i class="icon glyphicon glyphicon-remove"></i></span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col-md-12 form-group">
-                <div class="form-group">
-                  <label>Puso que puede dar:</label>
-                  <textarea disabled class="form-control" rows="5" ng-model="vm.ioUserTmp.profile.posibleCanTeach"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row" ng-if="vm.isStudent">
-          <div class="col-md-12">
-            <h4>Asignado a la carrera</h4>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="">Carreras</label>
-            <div class="input-group">
-              <select class="form-control" ng-model="vm.id_career" ng-disabled="::PERMISSIONS.reader">
-                <option value="">Seleccionar</option>
-                <option ng-repeat="item in vm.careers | orderBy: 'id_career' track by $index" value="{{item._id}}" ng-bind="item.title"></option>
-              </select>
-              <div class="input-group-btn">
-                <button ng-if="::!PERMISSIONS.reader" class="btn btn-primary pull-left" ng-click="vm.onClickOnCareer($event)">Agregar</button>
-              </div>
-            </div>
-          </div>
-          <div class="form-group col-md-3">
-            <label>&nbsp;</label>
-            <ul class="list-group">
-              <li class="list-group-item" ng-repeat="career in vm.careers | orderBy: 'title' track by $index" ng-show="vm.ioUserTmp.profile.onCareers.indexOf(career._id) > -1">
-                <span ng-bind="career.title"></span>
-                <span ng-click="vm.onClickRemoveOnCareer($event, career._id)" class="pull-right"><i class="icon glyphicon glyphicon-remove"></i></span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-md-12" ng-if="::vm.ioUserTmp.courses.length">
-            <div class="row">
-              <div class="col-md-12">
-                <h4>Cursos</h4>
-              </div>
-              <br>
-              <div class="col-md-12">
-                <table class="table table-hover table-courses">
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th width="5%">Camada</th>
-                      <th>Curso</th>
-                      <th>Comienza y Termina</th>
-                      <th>Dias</th>
-                      <th>Horario</th>
-                      <th width="5%" class="text-center">Pais</th>
-                      <th ng-if="vm.isTeacher" width="5%" class="text-center">&#9733; Rating</th>
-                      <th ng-if="vm.isTeacher" width="5%" class="text-center">Feedbacks</th>
-                      <th width="5%" class="text-center">Onboarding</th>
-                      <th width="5%" class="text-center">Finalizada</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="item in vm.ioUserTmp.courses | orderBy : '-id' track by $index" id="{{item._id}}" ng-class="{active: item.camada.completed}">
-                      <td>
-                        <a ui-sref="course({id: item._id})"><i class="fa fa-edit"></i></a>
-                      </td>
-                      <td ng-bind="item.camada.id"></td>
-                      <td ng-if="item.camada.class.name" ng-bind="item.camada.class.name"></td>
-                      <td ng-bind="(item.startDate | date:'dd/MM/yyyy') + ' - ' + (item.endDate | date:'dd/MM/yyyy')"></td>
-                      <td ng-bind="vm.getDays(item)"></td>
-                      <td ng-bind="item.startHour ? (item.startHour | date:'HH:mm')+' - '+(item.endHour | date:'HH:mm') : item.hours"></td>
-                      <td class="text-center" ng-bind="item.country | uppercase"></td>
-                      <td ng-if="vm.isTeacher" class="text-center" ng-bind="item.feedbacks.teacher.rating"></td>
-                      <td ng-if="vm.isTeacher" class="text-center" ng-click="vm.onClickShowFeedbacks($event, item.feedbacks.teacher.feedbacks)"><i class="glyphicon glyphicon-comment"></i></td>
-                      <td class="text-center"><i ng-if="item.onboarding" class="fa fa-check"></i></td>
-                      <td class="text-center"><i ng-if="item.camada.completed" class="fa fa-check"></i></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr>
-        <div class="row ">
-          <div class="col-md-12">
-            <h4>Perfil</h4>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group col-md-12 avatar-container">
-              <img ng-src="{{vm.ioUserTmp.profile.avatar}}" alt="" />
-            </div>
-            <div class="form-group col-md-12">
-              <label>Avatar</label>
-              <input type="file" class="form-control" ngf-select="" ng-model="vm.avatarFile" name="file" ngf-accept="'image/*'" />
-            </div>
-            <div class="form-group col-md-12">
-              <label>Bio</label>
-              <textarea rows="5" class="form-control" ng-model="vm.ioUserTmp.profile.bio"></textarea>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="row">
-              <div class="form-group col-md-12">
-                <label>Telefono</label>
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-mobile"></i>
-                  </span>
-                  <input type="tel" class="form-control" ng-model="vm.ioUserTmp.profile.phone" />
-                </div>
-              </div>
-              <div class="form-group col-md-12">
-                <label>Genero</label>
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-transgender" aria-hidden="true"></i>
-                  </span>
-                  <select class="form-control" ng-model="vm.ioUserTmp.profile.gender">
-                    <option value="">Selecciona</option>
-                    <option value="hombre">Hombre</option>
-                    <option value="mujer">Mujer</option>
-                    <option value="ninguno">Ninguno</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group col-md-12">
-                <label>Cumpleaños</label>
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-birthday-cake" aria-hidden="true"></i>
-                  </span>
-                  <input type="date" class="form-control" ng-model="vm.ioUserTmp.profile.bday" />
-                </div>
-              </div>
-              <div class="col-md-12" ng-if="vm.isTeacher || vm.ioUserTmp._id">
-                <div class="form-group">
-                  <label>Domicilio / Ciudad</label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="fa fa-map-marker" aria-hidden="true"></i>
-                    </span>
-                    <input ng-required="vm.isTeacher" type="text" g-places-autocomplete options="vm.geoConfig" class="form-control" placeholder="Ciudad" ng-model="vm.ioUserTmp.profile.city" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Estudios</label>
-                  <input type="text" class="form-control" ng-model="vm.ioUserTmp.profile.study" placeholder="Ej: Diseño grafico" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4" ng-if="vm.isTeacher">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Documento de Identidad</label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                    <i class="fa fa-book" aria-hidden="true"></i>
-                   </span>
-                    <input type="text" class="form-control" ng-model="vm.ioUserTmp.profile.dni" placeholder="Documento de Identidad" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>CUIT/RUT</label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                    <i class="fa  fa-university" aria-hidden="true"></i>
-                   </span>
-                    <input type="text" class="form-control" ng-model="vm.ioUserTmp.profile.banking.cuit" placeholder="CUIT/RUT" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Tipo de boleta/factura</label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                    <i class="fa  fa-university" aria-hidden="true"></i>
-                   </span>
-                    <input type="text" class="form-control" ng-model="vm.ioUserTmp.profile.banking.invoiceType" placeholder="" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Banco</label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                    <i class="fa  fa-university" aria-hidden="true"></i>
-                   </span>
-                    <input type="text" class="form-control" ng-model="vm.ioUserTmp.profile.banking.name" placeholder="Nombre de tu banco" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Tipo de cuenta</label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                    <i class="fa  fa-university" aria-hidden="true"></i>
-                   </span>
-                    <input type="text" class="form-control" ng-model="vm.ioUserTmp.profile.banking.account.type" placeholder="Tipo de cuenta" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Numero de cuenta</label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                    <i class="fa  fa-university" aria-hidden="true"></i>
-                   </span>
-                    <input type="text" class="form-control" ng-model="vm.ioUserTmp.profile.banking.account.number" placeholder="Numero de cuenta" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>CBU</label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="fa  fa-university" aria-hidden="true"></i>
-                     </span>
-                    <input type="text" class="form-control" ng-model="vm.ioUserTmp.profile.banking.cbu" placeholder="CBU" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Nombre de contacto de emergencia</label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="fa  fa-university" aria-hidden="true"></i>
-                     </span>
-                    <input type="text" class="form-control" ng-model="vm.ioUserTmp.profile.emergency.contact" placeholder="Nombre de emergencia" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Número de teléfono de contacto de emergencia</label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="fa fa-university" aria-hidden="true"></i>
-                     </span>
-                    <input type="text" class="form-control" ng-model="vm.ioUserTmp.profile.emergency.phone" placeholder="Numero de emergencia" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-md-12">
-            <h4>Social</h4>
-          </div>
-          <div class="form-group col-md-3" ng-if="vm.ioUserTmp._id">
-            <label>Skype</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-skype"></i>
-              </span>
-              <input type="text" class="form-control" placeholder="Ej: Usuario" ng-model="vm.ioUserTmp.profile.skype" />
-            </div>
-          </div>
-          <div class="form-group col-md-3" ng-if="vm.ioUserTmp._id">
-            <label>Github</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-github"></i>
-              </span>
-              <input type="url" class="form-control" placeholder="Ej: https://github.com/MiUsuario" ng-model="vm.ioUserTmp.profile.github" />
-            </div>
-          </div>
-          <div class="form-group col-md-3" ng-if="vm.isTeacher || vm.ioUserTmp._id">
-            <label>Linkedin</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-linkedin"></i>
-              </span>
-              <input ng-required="vm.isTeacher" type="url" class="form-control" placeholder="Ej: https://ar.linkedin.com/in/MiUsuario" ng-model="vm.ioUserTmp.profile.linkedin" />
-            </div>
-          </div>
-          <div class="form-group col-md-3" ng-if="vm.ioUserTmp._id">
-            <label>Behance</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-behance"></i>
-              </span>
-              <input type="url" class="form-control" placeholder="Ej: https://www.behance.net/MiUsuario" ng-model="vm.ioUserTmp.profile.behance" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr>
-      <div class="col-md-12">
-        <div class="form-content" ng-if="!vm.isTeacher">
-          <div class="row certifications-container" ng-if="::vm.ioUserTmp.profile.certifications.length">
-            <div class="col-md-12">
-              <div class="form-group">
-                <div class="col-md-12">
-                  <h4>Certificados</h4>
-                </div>
-                <br>
+    <br/>
+    <div class="container-fluid">
+        <form class="row" ng-submit="vm.onSubmit()">
+            <div class="col-md-12 form-content">
                 <div class="row">
-                  <div class="col-sm-3 col-md-3" ng-repeat="item in ::vm.ioUserTmp.profile.certifications | orderBy:'class.name' track by item._id">
-                    <a href="{{::item.url}}" target="_blank">
-                      <div class="thumbnail">
-                        <br>
-                        <div class="image" style="background-color: {{::item.style}}">
-                          <img ng-src="{{::item.logo}}" alt="{{::item.class.name}}">
-                        </div>
-                        <div class="caption">
-                          <h4 ng-bind="::item.class.name"></h4>
-                          <div class="btn-group btn-group-justified" role="group">
-                            <span class="btn btn-default btn-linkedin" ng-click="vm.onClickLinkedin($event, item.linkedinUrl)" target="_blank"><i class="fa fa-linkedin-square" aria-hidden="true"></i>&nbsp;&nbsp;Agregar al perfil</span>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
+                    <div class="col-md-12">
+                        <h4>Informacion basica</h4>
+                    </div>
                 </div>
-              </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Nombre</label>
+                                <input required type="text" class="form-control" ng-model="vm.capacitationCenterTmp.name" />
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Url</label>
+                                <input required type="text" class="form-control" ng-model="vm.capacitationCenterTmp.url" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Descripción</label>
+                                <textarea required class="form-control" rows="5" ng-model="vm.capacitationCenterTmp.description"></textarea>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="form-group col-md-6 avatar-container">
+                                    <img ng-src="{{vm.capacitationCenterTmp.avatar}}" alt="" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Avatar</label>
+                                    <input type="file" class="form-control" ngf-select="" ng-model="vm.avatarFile" name="file" ngf-accept="'image/*'" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ 
+                </hr>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Información de Contacto</h4>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                            <label>email</label>
+                            <input required type="text" class="form-control" ng-model="vm.capacitationCenterTmp.contact.email" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>phone</label>
+                            <input required type="text" class="form-control" ng-model="vm.capacitationCenterTmp.contact.phone" />
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                </hr>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                    <h4>Información de Disponibilidad</h4>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>address</label>
+                    <input required type="text" class="form-control" ng-model="vm.capacitationCenterTmp.location.address" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label>hora desde</label>
+                    <input required type="time" class="form-control" ng-model="vm.capacitationCenterTmp.location.hours.from" />
+                </div>
+                 <div class="form-group col-md-3">
+                    <label>hora hasta</label>
+                    <input required type="time" class="form-control" ng-model="vm.capacitationCenterTmp.location.hours.to" />
+                </div>
+                <!--<div class="form-group col-md-6">
+                    <label>days</label>
+                    <div class="checkbox">
+                        <label> <input type="checkbox"> Lunes</label>
+                        <label> <input type="checkbox"> Martes</label>
+                        <label> <input type="checkbox"> Miercoles</label>
+                        <label> <input type="checkbox"> Jueves</label>
+                        <label> <input type="checkbox"> Viernes</label>
+                        <label> <input type="checkbox"> Sabados</label>
+                        <label> <input type="checkbox"> Domingos</label>
+                    </div>
+                </div>-->
+                </div>
+
+                <hr>
+ 
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="5%" ng-click="vm.onClickOrderBy('name')">name</th>
+                                    <th width="10%" ng-click="vm.onClickOrderBy('description')">description</th>
+                                    <th width="5%" ng-click="vm.onClickOrderBy('url')">url</th>
+                                    <th width="5%" ng-click="vm.onClickOrderBy('published')">published</th>
+                                    <th width="5%" class="text-center"><i class="icon glyphicon glyphicon-remove"></i></th>
+                                </tr> 
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in vm.capacitationCenterTmp.courses | orderBy : vm.currentOrder track by $index" id="{{item._id}}" ng-click="vm.onClickEdit($event, item._id)">
+                                    <td><input type="text" class="form-control" ng-model="item.name"></td>
+                                    <td><input type="text" class="form-control" ng-model="item.description"></td>
+                                    <td><input type="text" class="form-control" ng-model="item.url"></td>
+                                    <td><input type="text" class="form-control" ng-model="item.published"></td>
+                                    <td ng-click="vm.onClickRemoveCourse($event, $index)" class="btn-delete text-center">
+                                        <i class="icon glyphicon glyphicon-remove"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="button" ng-click="vm.onClickAddCourse()" class="btn btn-primary pull-right">Agregar Curso</button>
+                    </div>
+                </div>
+            <br>
             </div>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div class="col-md-12">
-        <div class="row btns-container">
-          <div class="col-md-12">
-            <div class="btn-group" role="group">
-              <button type="button" ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickBlock($event)" class="btn btn-link" ng-show="vm.ioUserTmp._id && vm.ioUserTmp.enable">Bloquear</button>
-              <button type="button" ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickUnblock($event)" class="btn btn-link" ng-show="vm.ioUserTmp._id && !vm.ioUserTmp.enable">Desbloquear</button>
-              <button type="button" ui-sref="capacitation-centers" class="btn  btn-default">Cancelar</button>
-            </div>
-            <button type="submit" ng-if="::!PERMISSIONS.reader" class="btn btn-primary pull-right">Guardar</button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
+                <div class="col-md-12">
+                    <div class="row btns-container">
+                        <div class="col-md-12">
+                            <div class="btn-group" role="group">
+                                <button type="button" ng-click="vm.onClickBlock($event)" class="btn btn-link" ng-show="vm.capacitationCenterTmp._id && vm.capacitationCenterTmp.enable">Bloquear</button>
+                                <button type="button"  ng-click="vm.onClickUnblock($event)" class="btn btn-link" ng-show="vm.capacitationCenterTmp._id && !vm.capacitationCenterTmp.enable">Desbloquear</button>
+                                <button type="button" ui-sref="capacitation-centers" class="btn  btn-default">Cancelar</button>
+                            </div>
+                            <button type="submit" class="btn btn-primary pull-right">Guardar</button>
+                        </div>
+                    </div>
+                </div> 
+        </form>
+    </div>
 </div>
