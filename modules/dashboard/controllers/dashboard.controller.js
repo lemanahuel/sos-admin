@@ -8,12 +8,12 @@ angular
       var vm = this;
       $rootScope.PERMISSIONS = $rootScope.PERMISSIONS || {};
       vm.navItems = [{
-        title: 'Centros',
-        state: 'capacitation-center',
-        permissions: true
-      }, {
         title: 'Voluntarios',
         state: 'volunteers',
+        permissions: true
+      }, {
+        title: 'Centros',
+        state: 'capacitation-center',
         permissions: true
       }, {
         title: 'Usuarios',

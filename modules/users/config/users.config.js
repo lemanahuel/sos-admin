@@ -19,6 +19,22 @@ angular
             ]
           }
         })
+        .state('volunteers', {
+          url: '/voluntarios',
+          parent: 'dashboard',
+          templateUrl: 'modules/users/views/users.view.html',
+          controller: 'UsersController',
+          controllerAs: 'vm',
+          resolve: {
+            Users: ['UsersSrv',
+              function(UsersSrv) {
+                return UsersSrv.get({
+                  isVolunteer: true
+                });
+              }
+            ]
+          }
+        })
         .state('user-new', {
           url: '/usuarios/nuevo',
           parent: 'dashboard',
