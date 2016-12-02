@@ -5,6 +5,7 @@ angular
   .controller('UsersController', ['Users', 'UsersSrv', 'ModalSrv', '$state',
     function(Users, UsersSrv, ModalSrv, $state) {
       var vm = this;
+      vm.isVolunteersSection = $state.is('volunteers');
 
       function setCurrents(items) {
         vm.users = items && items.data;
