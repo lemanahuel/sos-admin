@@ -13,7 +13,7 @@ angular
         permissions: true
       }, {
         title: 'Centros',
-        state: 'capacitation-center',
+        state: 'capacitation-centers',
         permissions: true
       }, {
         title: 'Usuarios',
