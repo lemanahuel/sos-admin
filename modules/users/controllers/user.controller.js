@@ -28,7 +28,7 @@ angular
             NotificationsSrv.updated();
             setCurrent(user);
           } else {
-            $state.go('users', {
+            $state.go('user', {
               id: user && user.data._id
             });
             NotificationsSrv.success();
