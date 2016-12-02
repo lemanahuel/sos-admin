@@ -1,53 +1,51 @@
 <div class="users-container">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
-                <h2 class="section-title">
-                    <b>Usuarios (<span ng-bind="vm.Users.length"></span>)</b>
-                </h2>
-            </div>
-            <div class="col-md-6">
-                <div class="btn-group pull-right" role="group">
-                    <a ui-sref="user-new" class="btn btn-rounded btn-primary">Crear</a>
-                </div>
-            </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="section-title">
+          <b>Usuarios (<span ng-bind="vm.users.length"></span>)</b>
+        </h2>
+      </div>
+      <div class="col-md-6">
+        <div class="btn-group pull-right" role="group">
+          <a ui-sref="user-new" class="btn btn-rounded btn-primary">Crear</a>
         </div>
+      </div>
     </div>
-    <div class="container-fluid">
-        <br/>
-        <div class="row" ng-if="vm.Users.length">
-            <div class="col-md-12">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th width="5%" ng-click="vm.onClickOrderBy('firstName')">firstName</th>
-                            <th width="10%" ng-click="vm.onClickOrderBy('lastName')">lastName</th>
-                            <th width="5%" ng-click="vm.onClickOrderBy('gender')">gender</th>
-                            <th width="5%" ng-click="vm.onClickOrderBy('location')">location</th>
-                            <th width="5%" class="text-center"><i class="icon glyphicon glyphicon-remove"></i></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="item in vm.Users
-              | orderBy : vm.currentOrder 
-              track by item._id" id="{{::item._id}}" ng-click="vm.onClickEdit($event, item._id)">
-                            <td ng-bind="::item.firstName"></td>
-                            <td ng-bind="::item.lastName"></td>
-                            <td ng-bind="::item.gender"></td>
-                            <td ng-bind="::vm.location"></td>
-                            <td ng-click="vm.onClickRemove($event, item._id)" class="btn-delete text-center">
-                                <i class="icon glyphicon glyphicon-remove"></i>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row" ng-if="!vm.Users.length">
-            <div class="col-md-12">
-                <p>No hay users...</p>
-            </div>
-        </div>
-        <input class="form-control" type="text" id="copy-mails" style="opacity:0" />
+  </div>
+  <div class="container-fluid">
+    <br/>
+    <div class="row" ng-if="vm.users.length">
+      <div class="col-md-12">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th width="5%" ng-click="vm.onClickOrderBy('email')">Email</th>
+              <th width="10%" ng-click="vm.onClickOrderBy('comuna')">Comuna</th>
+              <th width="5%" ng-click="vm.onClickOrderBy('isVolunteer')">Voluntario ({{vm.amountOfVolunteers}})</th>
+              <th width="5%" class="text-center"><i class="icon glyphicon glyphicon-remove"></i></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in vm.users | orderBy : vm.currentOrder track by item._id" id="{{item._id}}" ng-click="vm.onClickEdit($event, item._id)">
+              <td ng-bind="item.email"></td>
+              <td ng-bind="item.comuna"></td>
+              <td>
+                <i ng-if="item.isVolunteer" class="icon fa fa-check"></i>
+              </td>
+              <td ng-click="vm.onClickRemove($event, item._id)" class="btn-delete text-center">
+                <i class="icon glyphicon glyphicon-remove"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+    <div class="row" ng-if="!vm.users.length">
+      <div class="col-md-12">
+        <p>No hay users...</p>
+      </div>
+    </div>
+    <input class="form-control" type="text" id="copy-mails" style="opacity:0" />
+  </div>
 </div>

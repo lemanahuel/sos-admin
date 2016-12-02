@@ -1,42 +1,50 @@
 'use strict';
 
 angular
-    .module('users')
-    .controller('UsersController', ['Users', 'UsersSrv', 'ModalSrv', '$state',
-        function(Users, UsersSrv, ModalSrv, $state) {
-            var vm = this;
+  .module('users')
+  .controller('UsersController', ['Users', 'UsersSrv', 'ModalSrv', '$state',
+    function(Users, UsersSrv, ModalSrv, $state) {
+      var vm = this;
 
-            function setCurrents(items) {
-                vm.User = items && items.data;
-                console.log(vm.User)
-            }
+      function setCurrents(items) {
+        vm.users = items && items.data;
+        vm.amountOfVolunteers = vm.users.filter(function(item) {
+          return item.isVolunteer;
+        }).length;
+        console.log(vm.users);
+      }
 
-            setCurrents(Users);
+      setCurrents(Users);
 
-            vm.onClickEdit = function(e, id) {
-                e.stopPropagation();
-                e.preventDefault();
-                $state.go('users', {
-                    id: id
-                });
-            };
+      vm.onClickOrderBy = function(by) {
+        vm.currentOrder = vm.currentOrder !== by ? by : '-' + by;
+      };
 
-            vm.onClickRemove = function(e, id) {
-                e.preventDefault();
-                e.stopPropagation();
+      vm.onClickEdit = function(e, id) {
+        e.stopPropagation();
+        e.preventDefault();
 
-                var findAndRemove = function(id) {
-                    vm.User = vm.User.filter(function(item) {
-                        return item._id !== id;
-                    });
-                };
+        $state.go('user', {
+          id: id
+        });
+      };
 
-                ModalSrv.open({
-                    url: 'modules/users/views/user.remove.view.html',
-                    confirm: function() {
-                        findAndRemove(id);
-                    }
-                });
-            };
-        }
-    ]);
+      vm.onClickRemove = function(e, id) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var findAndRemove = function(id) {
+          vm.user = vm.User.filter(function(item) {
+            return item._id !== id;
+          });
+        };
+
+        ModalSrv.open({
+          url: 'modules/users/views/user.remove.view.html',
+          confirm: function() {
+            findAndRemove(id);
+          }
+        });
+      };
+    }
+  ]);

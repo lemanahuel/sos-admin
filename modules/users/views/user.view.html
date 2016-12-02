@@ -1,309 +1,115 @@
 <div class="io-user-container">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
-                <h2 class="section-title" ng-if="vm.UserTmp._id">Usuario</h2>
-                <h2 class="section-title" ng-if="!vm.UserTmp._id">Usuario /
-                    <b>Nuevo</b>
-                </h2>
-            </div>
-        </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="section-title" ng-if="vm.userTmp._id">Usuario</h2>
+        <h2 class="section-title" ng-if="!vm.userTmp._id">Usuario /
+          <b>Nuevo</b>
+        </h2>
+      </div>
     </div>
-    <br/>
-    <div class="container-fluid">
-        <form class="row" ng-submit="vm.onSubmit()">
-            <div class="col-md-12 form-content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4>Informacion basica</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label>Nombre</label>
-                                <input required type="text" class="form-control" ng-model="vm.UserTmp.firstName" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Apellido</label>
-                                <input required type="text" class="form-control" ng-model="vm.UserTmp.last_name" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label>Email</label>
-                                <div class="input-group">
-                                    <input required type="email" class="form-control" ng-model="vm.UserTmp.email" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row ">
-                    <div class="col-md-12">
-                        <h4>Perfil</h4>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group col-md-12 avatar-container">
-                            <img ng-src="{{vm.UserTmp.profile.avatar}}" alt="" />
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label>Avatar</label>
-                            <input type="file" class="form-control" ngf-select="" ng-model="vm.avatarFile" name="file" ngf-accept="'image/*'" />
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label>Bio</label>
-                            <textarea rows="5" class="form-control" ng-model="vm.UserTmp.profile.bio"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label>Telefono</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
+  </div>
+  <br/>
+  <div class="container-fluid">
+    <form class="row" ng-submit="vm.onSubmit()">
+      <div class="col-md-12 form-content">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Informacion basica</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label>Nombre</label>
+                <input required type="text" class="form-control" ng-model="vm.userTmp.firstName" />
+              </div>
+              <div class="form-group col-md-6">
+                <label>Apellido</label>
+                <input required type="text" class="form-control" ng-model="vm.userTmp.lastName" />
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Email</label>
+                <input required type="email" class="form-control" ng-model="vm.userTmp.email" />
+              </div>
+              <div class="form-group col-md-6">
+                <label>Telefono</label>
+                <div class="input-group">
+                  <span class="input-group-addon">
                     <i class="fa fa-mobile"></i>
                   </span>
-                                    <input type="tel" class="form-control" ng-model="vm.UserTmp.profile.phone" />
-                                </div>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>Genero</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                    <i class="fa fa-transgender" aria-hidden="true"></i>
-                  </span>
-                                    <select class="form-control" ng-model="vm.UserTmp.profile.gender">
+                  <input type="tel" class="form-control" ng-model="vm.userTmp.phone" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label>Genero</label>
+                <select class="form-control" ng-model="vm.userTmp.gender">
                     <option value="">Selecciona</option>
                     <option value="hombre">Hombre</option>
                     <option value="mujer">Mujer</option>
                     <option value="ninguno">Ninguno</option>
                   </select>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>Cumpleaños</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                    <i class="fa fa-birthday-cake" aria-hidden="true"></i>
-                  </span>
-                                    <input type="date" class="form-control" ng-model="vm.UserTmp.profile.bday" />
-                                </div>
-                            </div>
-                            <div class="col-md-12" ng-if="vm.isTeacher || vm.UserTmp._id">
-                                <div class="form-group">
-                                    <label>Domicilio / Ciudad</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                      <i class="fa fa-map-marker" aria-hidden="true"></i>
-                    </span>
-                                        <input ng-required="vm.isTeacher" type="text" g-places-autocomplete options="vm.geoConfig" class="form-control" placeholder="Ciudad" ng-model="vm.UserTmp.profile.city" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Estudios</label>
-                                    <input type="text" class="form-control" ng-model="vm.UserTmp.profile.study" placeholder="Ej: Diseño grafico" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4" ng-if="vm.isTeacher">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Documento de Identidad</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Documento de Identidad</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
                     <i class="fa fa-book" aria-hidden="true"></i>
                    </span>
-                                        <input type="text" class="form-control" ng-model="vm.UserTmp.profile.dni" placeholder="Documento de Identidad" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>CUIT/RUT</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                    <i class="fa  fa-university" aria-hidden="true"></i>
-                   </span>
-                                        <input type="text" class="form-control" ng-model="vm.UserTmp.profile.banking.cuit" placeholder="CUIT/RUT" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Tipo de boleta/factura</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                    <i class="fa  fa-university" aria-hidden="true"></i>
-                   </span>
-                                        <input type="text" class="form-control" ng-model="vm.UserTmp.profile.banking.invoiceType" placeholder="" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Banco</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                    <i class="fa  fa-university" aria-hidden="true"></i>
-                   </span>
-                                        <input type="text" class="form-control" ng-model="vm.UserTmp.profile.banking.name" placeholder="Nombre de tu banco" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Tipo de cuenta</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                    <i class="fa  fa-university" aria-hidden="true"></i>
-                   </span>
-                                        <input type="text" class="form-control" ng-model="vm.UserTmp.profile.banking.account.type" placeholder="Tipo de cuenta" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Numero de cuenta</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                    <i class="fa  fa-university" aria-hidden="true"></i>
-                   </span>
-                                        <input type="text" class="form-control" ng-model="vm.UserTmp.profile.banking.account.number" placeholder="Numero de cuenta" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>CBU</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                      <i class="fa  fa-university" aria-hidden="true"></i>
-                     </span>
-                                        <input type="text" class="form-control" ng-model="vm.UserTmp.profile.banking.cbu" placeholder="CBU" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Nombre de contacto de emergencia</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                      <i class="fa  fa-university" aria-hidden="true"></i>
-                     </span>
-                                        <input type="text" class="form-control" ng-model="vm.UserTmp.profile.emergency.contact" placeholder="Nombre de emergencia" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Número de teléfono de contacto de emergencia</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                      <i class="fa fa-university" aria-hidden="true"></i>
-                     </span>
-                                        <input type="text" class="form-control" ng-model="vm.UserTmp.profile.emergency.phone" placeholder="Numero de emergencia" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <input type="text" class="form-control" ng-model="vm.userTmp.dni" placeholder="Documento de Identidad" />
+                  </div>
                 </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4>Social</h4>
-                    </div>
-                    <div class="form-group col-md-3" ng-if="vm.UserTmp._id">
-                        <label>Skype</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                <i class="fa fa-skype"></i>
-              </span>
-                            <input type="text" class="form-control" placeholder="Ej: Usuario" ng-model="vm.UserTmp.profile.skype" />
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3" ng-if="vm.UserTmp._id">
-                        <label>Github</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                <i class="fa fa-github"></i>
-              </span>
-                            <input type="url" class="form-control" placeholder="Ej: https://github.com/MiUsuario" ng-model="vm.UserTmp.profile.github" />
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3" ng-if="vm.isTeacher || vm.UserTmp._id">
-                        <label>Linkedin</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                <i class="fa fa-linkedin"></i>
-              </span>
-                            <input ng-required="vm.isTeacher" type="url" class="form-control" placeholder="Ej: https://ar.linkedin.com/in/MiUsuario" ng-model="vm.UserTmp.profile.linkedin" />
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3" ng-if="vm.UserTmp._id">
-                        <label>Behance</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                <i class="fa fa-behance"></i>
-              </span>
-                            <input type="url" class="form-control" placeholder="Ej: https://www.behance.net/MiUsuario" ng-model="vm.UserTmp.profile.behance" />
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
-            <hr>
-            <div class="col-md-12">
-                <div class="form-content" ng-if="!vm.isTeacher">
-                    <div class="row certifications-container" ng-if="::vm.UserTmp.profile.certifications.length">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <h4>Certificados</h4>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm-3 col-md-3" ng-repeat="item in ::vm.UserTmp.profile.certifications | orderBy:'class.name' track by item._id">
-                                        <a href="{{::item.url}}" target="_blank">
-                                            <div class="thumbnail">
-                                                <br>
-                                                <div class="image" style="background-color: {{::item.style}}">
-                                                    <img ng-src="{{::item.logo}}" alt="{{::item.class.name}}">
-                                                </div>
-                                                <div class="caption">
-                                                    <h4 ng-bind="::item.class.name"></h4>
-                                                    <div class="btn-group btn-group-justified" role="group">
-                                                        <span class="btn btn-default btn-linkedin" ng-click="vm.onClickLinkedin($event, item.linkedinUrl)" target="_blank"><i class="fa fa-linkedin-square" aria-hidden="true"></i>&nbsp;&nbsp;Agregar al perfil</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+
+      <div class="col-md-12 form-content">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Voluntario</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <br>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" ng-model="vm.userTmp.isVolunteer" > Es voluntario
+                </label>
                 </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label>Esta en la comuna:</label>
+                <input type="text" class="form-control" ng-model="vm.userTmp.comuna" placeholder="Comuna" />
+              </div>
             </div>
-            <br/>
-            <div class="col-md-12">
-                <div class="row btns-container">
-                    <div class="col-md-12">
-                        <div class="btn-group" role="group">
-                            <button type="button" ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickBlock($event)" class="btn btn-link" ng-show="vm.UserTmp._id && vm.UserTmp.enable">Bloquear</button>
-                            <button type="button" ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickUnblock($event)" class="btn btn-link" ng-show="vm.UserTmp._id && !vm.UserTmp.enable">Desbloquear</button>
-                            <button type="button" ui-sref="users" class="btn  btn-default">Cancelar</button>
-                        </div>
-                        <button type="submit" ng-if="::!PERMISSIONS.reader" class="btn btn-primary pull-right">Guardar</button>
-                    </div>
-                </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="col-md-12">
+        <div class="row btns-container">
+          <div class="col-md-12">
+            <div class="btn-group" role="group">
+              <button type="button" ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickBlock($event)" class="btn btn-link" ng-show="vm.userTmp._id && vm.userTmp.enable">Bloquear</button>
+              <button type="button" ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickUnblock($event)" class="btn btn-link" ng-show="vm.userTmp._id && !vm.userTmp.enable">Desbloquear</button>
+              <button type="button" ui-sref="users" class="btn  btn-default">Cancelar</button>
             </div>
-        </form>
-    </div>
+            <button type="submit" ng-if="::!PERMISSIONS.reader" class="btn btn-primary pull-right">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
