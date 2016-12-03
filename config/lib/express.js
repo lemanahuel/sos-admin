@@ -162,6 +162,7 @@ module.exports.initModulesClientRoutes = (app) => {
   if (process.env.NODE_ENV === 'development') {
     // Setting the app router and static folder
     app.use('/', express.static(path.resolve('./public')));
+    app.use('/node_modules', express.static(path.resolve('./node_modules')));
 
     // Globbing static routing
     _.each(config.folders.client, (staticPath) => {
