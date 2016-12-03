@@ -23,8 +23,8 @@ angular
   .constant('PATHS', {
     API: window.SOS_API,
     CAPACITATION_CENTERS: window.SOS_API + '/private/capacitation-centers',
-    EMERGENCIES: window.SOS_API + '/private/emergencies',
     USERS: window.SOS_API + '/private/users',
+    INCIDENTS: window.SOS_API + '/private/incidents',
     AUTH: window.SOS_API + '/authenticate'
   })
   .constant('ROLES', {

@@ -1,21 +1,17 @@
 'use strict';
 
 angular
-  .module('users')
-  .controller('UsersController', ['Users', 'UsersSrv', 'ModalSrv', '$state',
-    function(Users, UsersSrv, ModalSrv, $state) {
+  .module('incidents')
+  .controller('IncidentsController', ['Incidents', 'IncidentsSrv', 'ModalSrv', '$state',
+    function(Incidents, IncidentsSrv, ModalSrv, $state) {
       var vm = this;
-      vm.isVolunteersSection = $state.is('volunteers');
 
       function setCurrents(items) {
-        vm.users = items && items.data;
-        vm.amountOfVolunteers = vm.users.filter(function(item) {
-          return item.isVolunteer;
-        }).length;
-        console.log(vm.users);
+        vm.incidents = items && items.data;
+        console.log(vm.incidents);
       }
 
-      setCurrents(Users);
+      setCurrents(Incidents);
 
       vm.onClickOrderBy = function(by) {
         vm.currentOrder = vm.currentOrder !== by ? by : '-' + by;
@@ -25,7 +21,7 @@ angular
         e.stopPropagation();
         e.preventDefault();
 
-        $state.go('user', {
+        $state.go('incident', {
           id: id
         });
       };
@@ -35,13 +31,13 @@ angular
         e.stopPropagation();
 
         var findAndRemove = function(id) {
-          vm.users = vm.users.filter(function(item) {
+          vm.incidents = vm.incidents.filter(function(item) {
             return item._id !== id;
           });
         };
 
         ModalSrv.open({
-          url: 'modules/users/views/user.remove.view.html',
+          url: 'modules/incidents/views/incident.remove.view.html',
           confirm: function() {
             findAndRemove(id);
           }

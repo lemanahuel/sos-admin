@@ -12,6 +12,10 @@ angular
         state: 'volunteers',
         permissions: true
       }, {
+        title: 'Incidentes',
+        state: 'incidents',
+        permissions: true
+      }, {
         title: 'Centros',
         state: 'capacitation-centers',
         permissions: true

@@ -1,0 +1,115 @@
+<div class="io-user-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="section-title" ng-if="vm.userTmp._id">Usuario</h2>
+        <h2 class="section-title" ng-if="!vm.userTmp._id">Usuario /
+          <b>Nuevo</b>
+        </h2>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="container-fluid">
+    <form class="row" ng-submit="vm.onSubmit()">
+      <div class="col-md-12 form-content">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Informacion basica</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label>Nombre</label>
+                <input required type="text" class="form-control" ng-model="vm.userTmp.firstName" />
+              </div>
+              <div class="form-group col-md-6">
+                <label>Apellido</label>
+                <input required type="text" class="form-control" ng-model="vm.userTmp.lastName" />
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Email</label>
+                <input required type="email" class="form-control" ng-model="vm.userTmp.email" />
+              </div>
+              <div class="form-group col-md-6">
+                <label>Telefono</label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-mobile"></i>
+                  </span>
+                  <input type="tel" class="form-control" ng-model="vm.userTmp.phone" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label>Genero</label>
+                <select class="form-control" ng-model="vm.userTmp.gender">
+                    <option value="">Selecciona</option>
+                    <option value="hombre">Hombre</option>
+                    <option value="mujer">Mujer</option>
+                    <option value="ninguno">Ninguno</option>
+                  </select>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Documento de Identidad</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                    <i class="fa fa-book" aria-hidden="true"></i>
+                   </span>
+                    <input type="text" class="form-control" ng-model="vm.userTmp.dni" placeholder="Documento de Identidad" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+
+      <div class="col-md-12 form-content">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Voluntario</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <br>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" ng-model="vm.userTmp.isVolunteer" > Es voluntario
+                </label>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label>Esta en la comuna:</label>
+                <input type="text" class="form-control" ng-model="vm.userTmp.comuna" placeholder="Comuna" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="col-md-12">
+        <div class="row btns-container">
+          <div class="col-md-12">
+            <div class="btn-group" role="group">
+              <button type="button" ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickBlock($event)" class="btn btn-link" ng-show="vm.userTmp._id && vm.userTmp.enable">Bloquear</button>
+              <button type="button" ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickUnblock($event)" class="btn btn-link" ng-show="vm.userTmp._id && !vm.userTmp.enable">Desbloquear</button>
+              <button type="button" ui-sref="users" class="btn  btn-default">Cancelar</button>
+            </div>
+            <button type="submit" ng-if="::!PERMISSIONS.reader" class="btn btn-primary pull-right">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
