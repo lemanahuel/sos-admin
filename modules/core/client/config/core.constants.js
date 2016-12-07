@@ -25,6 +25,7 @@ angular
     CAPACITATION_CENTERS: window.SOS_API + '/private/capacitation-centers',
     USERS: window.SOS_API + '/private/users',
     INCIDENTS: window.SOS_API + '/private/incidents',
+    TESTIMONIES: window.SOS_API + '/private/testimonies',
     AUTH: window.SOS_API + '/authenticate'
   })
   .constant('ROLES', {
