@@ -22,7 +22,7 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <canvas id="pie" class="chart chart-pie" chart-data="vm.incidentsData" chart-labels="vm.incidentsLabels" chart-options="options"></canvas>
+        <canvas id="pie" class="chart chart-pie" chart-data="vm.incidentsData" chart-labels="vm.incidentsLabels"></canvas>
       </div>
       <div class="col-md-6">
         <table class="table table-hover">
@@ -38,6 +38,43 @@
               <td ng-bind="item.comuna"></td>
               <td ng-bind="item.incidents"></td>
               <td ng-bind="item.responses"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Voluntarios</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <canvas id="pie" class="chart chart-pie" chart-data="vm.volunteersData" chart-labels="vm.volunteersLabels"></canvas>
+        <br>
+        <h5 class="text-center">Voluntarios / Usuarios</h5>
+      </div>
+      <div class="col-md-4">
+        <canvas id="pie" class="chart chart-pie" chart-data="vm.volunteersByComunaData" chart-labels="vm.volunteersByComunaLabels"></canvas>
+        <br>
+        <h5 class="text-center">Voluntarios por comuna</h5>
+      </div>
+      <div class="col-md-4">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th width="5%" ng-click="vm.onClickOrderBy('comuna')">Comuna</th>
+              <th width="25%" ng-click="vm.onClickOrderBy('volunteers')">Voluntarios</th>
+              <th width="5%" ng-click="vm.onClickOrderBy('civils')">Civiles</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in vm.volunteersTable | orderBy : '-incidents' track by $index">
+              <td ng-bind="item.comuna"></td>
+              <td ng-bind="item.volunteers"></td>
+              <td ng-bind="item.civils"></td>
             </tr>
           </tbody>
         </table>
