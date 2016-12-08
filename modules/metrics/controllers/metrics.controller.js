@@ -75,7 +75,7 @@ angular
           return item.isVolunteer;
         });
 
-        vm.volunteersLabels = ['Civil', 'Voluntarios'];
+        vm.volunteersLabels = ['Civiles', 'Voluntarios'];
         vm.volunteersData = [civils.length, volunteers.length];
 
         var volunteersTable = [];
@@ -112,7 +112,5 @@ angular
       }
 
       setVolunteersChart();
-
-      // Voluntarios(Cuantos voluntarios por comuna, y cuantos usuarios son voluntarios, masculinos y femeninos)
     }
   ]);
