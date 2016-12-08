@@ -27,6 +27,10 @@ angular
         title: 'Testimonios',
         state: 'testimonies',
         permissions: true
+      }, {
+        title: 'Metricas',
+        state: 'metrics',
+        permissions: true
       }];
 
       vm.isCollapsed = [];

@@ -14,7 +14,8 @@ window.APP = (function() {
       'ngFileUpload',
       'ui-notification',
       'google.places',
-      'ngAnimate'
+      'ngAnimate',
+      'chart.js'
     ],
     ADD_MODULE: function(moduleName, dependencies) {
       angular.module(moduleName, dependencies || []);

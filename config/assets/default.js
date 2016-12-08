@@ -28,6 +28,8 @@ module.exports = {
         'node_modules/angular-google-places-autocomplete/dist/autocomplete.min.js',
         'node_modules/angular-trix/dist/angular-trix.min.js',
         'node_modules/angular-i18n/angular-locale_es-ar.js',
+        'node_modules/chart.js/dist/Chart.min.js',
+        'node_modules/angular-chart.js/dist/angular-chart.min.js'
       ]
     },
     css: [
