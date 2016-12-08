@@ -96,14 +96,34 @@
             </div>
           </div>
         </div>
+        <hr>
       </div>
-      <hr>
+      <div class="col-md-12 form-content">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Rol</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <br>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" ng-model="vm.userTmp.isAdmin"> Administrador
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="col-md-12">
         <div class="row btns-container">
           <div class="col-md-12">
             <div class="btn-group" role="group">
-              <button type="button" ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickBlock($event)" class="btn btn-link" ng-show="vm.userTmp._id && vm.userTmp.enable">Bloquear</button>
-              <button type="button" ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickUnblock($event)" class="btn btn-link" ng-show="vm.userTmp._id && !vm.userTmp.enable">Desbloquear</button>
+              <button type="button" ng-click="vm.onClickDelete($event)" class="btn btn-link" ng-show="vm.userTmp._id">Eliminar</button>
               <button type="button" ui-sref="users" class="btn  btn-default">Cancelar</button>
             </div>
             <button type="submit" ng-if="::!PERMISSIONS.reader" class="btn btn-primary pull-right">Guardar</button>

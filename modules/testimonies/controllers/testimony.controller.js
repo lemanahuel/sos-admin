@@ -2,26 +2,9 @@
 
 angular
   .module('testimonies')
-  .controller('TestimonyController', ['Testimony', 'TestimoniesSrv', 'ModalSrv', '$state', '$scope', 'NotificationsSrv', 'ROLES', '$rootScope',
-    function(Testimony, TestimoniesSrv, ModalSrv, $state, $scope, NotificationsSrv, ROLES, $rootScope) {
+  .controller('TestimonyController', ['Testimony', 'TestimoniesSrv', 'ModalSrv', '$state', '$scope', 'NotificationsSrv', '$rootScope',
+    function(Testimony, TestimoniesSrv, ModalSrv, $state, $scope, NotificationsSrv, $rootScope) {
       var vm = this;
-      vm.roles = ROLES;
-
-      //   type: String,
-      //     trim: true
-      // },
-      // lastname: {
-      //   type: String,
-      //   trim: true
-      // },
-      // email: {
-      //   type: String,
-      //   trim: true
-      // },
-      // text: {
-      //   type: String,
-      //   trim: true
-      // },
 
       function setCurrent(current) {
         current = current && current.data || {};
@@ -31,6 +14,23 @@ angular
       }
 
       setCurrent(Testimony);
+
+      vm.onClickDelete = function() {
+        ModalSrv.open({
+          url: 'modules/testimonies/views/testimony.remove.view.html',
+          confirm: function() {
+            TestimoniesSrv.delete({
+              _id: vm.testimonyTmp._id
+            }).then(function() {
+              NotificationsSrv.removed();
+              $state.go('testimonies');
+            }, function(err) {
+              NotificationsSrv.error();
+              console.debug(err);
+            });
+          }
+        });
+      };
 
       vm.onSubmit = function() {
         TestimoniesSrv.upsert({

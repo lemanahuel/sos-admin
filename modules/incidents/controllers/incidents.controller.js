@@ -40,6 +40,17 @@ angular
           url: 'modules/incidents/views/incident.remove.view.html',
           confirm: function() {
             findAndRemove(id);
+            // IncidentsSrv.delete({
+            //   _id: id
+            // });
+            IncidentsSrv.delete({
+              _id: id
+            }).then(function() {
+              NotificationsSrv.removed();
+            }, function(err) {
+              NotificationsSrv.error();
+              console.debug(err);
+            });
           }
         });
       };

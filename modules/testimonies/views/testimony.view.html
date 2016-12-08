@@ -54,9 +54,8 @@
         <div class="row btns-container">
           <div class="col-md-12">
             <div class="btn-group" role="group">
-              <button type="button" ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickBlock($event)" class="btn btn-link" ng-show="vm.testimonyTmp._id && vm.testimonyTmp.enable">Bloquear</button>
-              <button type="button" ng-if="::!PERMISSIONS.reader" ng-click="vm.onClickUnblock($event)" class="btn btn-link" ng-show="vm.testimonyTmp._id && !vm.testimonyTmp.enable">Desbloquear</button>
-              <button type="button" ui-sref="users" class="btn  btn-default">Cancelar</button>
+              <button type="button" ng-click="vm.onClickDelete($event)" class="btn btn-link" ng-show="vm.testimonyTmp._id">Eliminar</button>
+              <button type="button" ui-sref="testimonies" class="btn  btn-default">Cancelar</button>
             </div>
             <button type="submit" ng-if="::!PERMISSIONS.reader" class="btn btn-primary pull-right">Guardar</button>
           </div>

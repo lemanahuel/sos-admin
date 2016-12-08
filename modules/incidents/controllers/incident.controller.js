@@ -2,34 +2,46 @@
 
 angular
   .module('incidents')
-  .controller('IncidentController', ['User', 'UsersSrv', 'ModalSrv', '$state', '$scope', 'NotificationsSrv', 'ROLES', '$rootScope',
-    function(User, UsersSrv, ModalSrv, $state, $scope, NotificationsSrv, ROLES, $rootScope) {
+  .controller('IncidentController', ['Incident', 'IncidentsSrv', 'ModalSrv', '$state', '$scope', 'NotificationsSrv', '$rootScope',
+    function(Incident, IncidentsSrv, ModalSrv, $state, $scope, NotificationsSrv, $rootScope) {
       var vm = this;
-      vm.roles = ROLES;
-
-      vm.geoConfig = {
-        types: ['geocode']
-      };
 
       function setCurrent(current) {
         current = current && current.data || {};
         console.log(current);
 
-        vm.userTmp = current;
+        vm.incidentTmp = current;
       }
 
-      setCurrent(User);
+      setCurrent(Incident);
+
+      vm.onClickDelete = function() {
+        ModalSrv.open({
+          url: 'modules/incidents/views/incident.remove.view.html',
+          confirm: function() {
+            IncidentsSrv.delete({
+              _id: vm.incidentTmp._id
+            }).then(function() {
+              NotificationsSrv.removed();
+              $state.go('incidents');
+            }, function(err) {
+              NotificationsSrv.error();
+              console.debug(err);
+            });
+          }
+        });
+      };
 
       vm.onSubmit = function() {
-        UsersSrv.upsert({
-          user: vm.userTmp
-        }).then(function(user) {
-          if (vm.userTmp._id) {
+        IncidentsSrv.upsert({
+          incident: vm.incidentTmp
+        }).then(function(incident) {
+          if (vm.incidentTmp._id) {
             NotificationsSrv.updated();
-            setCurrent(user);
+            setCurrent(incident);
           } else {
-            $state.go('user', {
-              id: user && user.data._id
+            $state.go('incident', {
+              id: incident && incident.data._id
             });
             NotificationsSrv.success();
           }
@@ -38,6 +50,5 @@ angular
           console.debug(err);
         });
       };
-
     }
   ]);

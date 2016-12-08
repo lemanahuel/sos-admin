@@ -34,6 +34,15 @@ angular
           vm.testimonies = vm.testimonies.filter(function(item) {
             return item._id !== id;
           });
+
+          TestimoniesSrv.delete({
+            _id: id
+          }).then(function() {
+            NotificationsSrv.removed();
+          }, function(err) {
+            NotificationsSrv.error();
+            console.debug(err);
+          });
         };
 
         ModalSrv.open({

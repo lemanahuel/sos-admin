@@ -51,6 +51,23 @@ angular
         vm.capacitationCenterTmp.courses.splice(index, 1);
       };
 
+      vm.onClickDelete = function() {
+        ModalSrv.open({
+          url: 'modules/capacitation-centers/views/capacitation-center.remove.view.html',
+          confirm: function() {
+            CapacitationCentersSrv.delete({
+              _id: vm.capacitationCenterTmp._id
+            }).then(function() {
+              NotificationsSrv.removed();
+              $state.go('capacitation-centers');
+            }, function(err) {
+              NotificationsSrv.error();
+              console.debug(err);
+            });
+          }
+        });
+      };
+
       vm.onSubmit = function() {
         CapacitationCentersSrv.upsert({
           center: vm.capacitationCenterTmp

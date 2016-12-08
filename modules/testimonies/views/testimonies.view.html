@@ -30,7 +30,9 @@
             <tr ng-repeat="item in vm.testimonies | orderBy : vm.currentOrder track by item._id" id="{{item._id}}" ng-click="vm.onClickEdit($event, item._id)">
               <td ng-bind="item.email"></td>
               <td ng-bind="item.text"></td>
-              <td ng-bind="item.published"></td>
+              <td>
+                <i ng-if="item.published" class="fa fa-star" aria-hidden="true"></i>
+              </td>
               <td ng-click="vm.onClickRemove($event, item._id)" class="btn-delete text-center">
                 <i class="icon glyphicon glyphicon-remove"></i>
               </td>

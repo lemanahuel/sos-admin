@@ -2,23 +2,34 @@
 
 angular
   .module('users')
-  .controller('UserController', ['User', 'UsersSrv', 'ModalSrv', '$state', '$scope', 'NotificationsSrv', 'ROLES', '$rootScope',
-    function(User, UsersSrv, ModalSrv, $state, $scope, NotificationsSrv, ROLES, $rootScope) {
+  .controller('UserController', ['User', 'UsersSrv', 'ModalSrv', '$state', '$scope', 'NotificationsSrv', '$rootScope',
+    function(User, UsersSrv, ModalSrv, $state, $scope, NotificationsSrv, $rootScope) {
       var vm = this;
-      vm.roles = ROLES;
-
-      vm.geoConfig = {
-        types: ['geocode']
-      };
 
       function setCurrent(current) {
         current = current && current.data || {};
         console.log(current);
-
         vm.userTmp = current;
       }
 
       setCurrent(User);
+
+      vm.onClickDelete = function(id) {
+        ModalSrv.open({
+          url: 'modules/users/views/user.remove.view.html',
+          confirm: function() {
+            UsersSrv.delete({
+              _id: id
+            }).then(function() {
+              NotificationsSrv.removed();
+              $state.go('users');
+            }, function(err) {
+              NotificationsSrv.error();
+              console.debug(err);
+            });
+          }
+        });
+      };
 
       vm.onSubmit = function() {
         UsersSrv.upsert({
