@@ -29,7 +29,7 @@
           </thead>
           <tbody>
             <tr ng-repeat="item in vm.incidents | orderBy : vm.currentOrder track by item._id" id="{{item._id}}" ng-click="vm.onClickEdit($event, item._id)" ng-if="item.comuna">
-              <td ng-bind="item.createdAt | date:'dd/mm/yyyy HH:mm'"></td>
+              <td ng-bind="item.createdAt | date:'dd/MM/yyyy HH:mm'"></td>
               <td ng-bind="item.comuna"></td>
               <td ng-bind="item.location.formatted_address"></td>
               <td ng-bind="item.responses.length"></td>
