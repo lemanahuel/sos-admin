@@ -15,7 +15,7 @@ window.SOS_API = (function() {
     base = host.split(':')[0] + ':3001';
   }
 
-  return 'https://' + base;
+  return location.protocol + '//' + base;
 })();
 
 angular

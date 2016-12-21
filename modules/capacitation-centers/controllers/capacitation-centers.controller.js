@@ -2,8 +2,8 @@
 
 angular
   .module('capacitation-centers')
-  .controller('CapacitationCentersController', ['CapacitationCenters', 'ModalSrv', 'CapacitationCentersSrv', '$state',
-    function(CapacitationCenters, ModalSrv, CapacitationCentersSrv, $state) {
+  .controller('CapacitationCentersController', ['CapacitationCenters', 'ModalSrv', 'CapacitationCentersSrv', '$state', 'NotificationsSrv',
+    function(CapacitationCenters, ModalSrv, CapacitationCentersSrv, $state, NotificationsSrv) {
       var vm = this;
 
       function setCurrents(items) {
