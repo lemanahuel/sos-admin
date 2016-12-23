@@ -11,31 +11,31 @@ angular
       auth.signin({
         primaryColor: '#43c1c2',
         dict: 'es',
-        icon: './modules/core/client/img/sos-icon-big.ico',
+        icon: './modules/core/client/img/sos-logo-big.ico',
         closable: false,
         sso: false
       }, function(profile, idToken, accessToken, state, refreshToken) {
         // All good
+        console.log(profile, idToken, accessToken, state, refreshToken);
         SessionSrv.set({
           auth_profile: profile,
           token: idToken
         });
-        UsersSrv.get({
-          id: profile.identities[0].user_id
+        UsersSrv.getByEmail({
+          email: profile.email
         }).then(function(User) {
           var user = User && User.data;
+          user = user[0] || user;
           console.log('user', user);
           //teacher && approved
-          if (user && ((user.role !== 3) || (user.role === 3 && user.status === 4))) {
+          if (user && user.isAdmin) {
             SessionSrv.set({
               user: user
             });
             PermissionsSrv.set(user);
-
             SessionSrv.set({
               profile: user.profile
             });
-
             $state.go('incidents');
           } else {
             NotificationsSrv.error({
