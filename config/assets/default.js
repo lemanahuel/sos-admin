@@ -9,10 +9,7 @@ module.exports = {
         'node_modules/font-awesome/css/font-awesome.min.css',
         'node_modules/angular-loading-bar/build/loading-bar.min.css',
         'node_modules/angular-ui-notification/dist/angular-ui-notification.min.css',
-        'node_modules/angular-google-places-autocomplete/dist/autocomplete.min.css',
-        'node_modules/trix/dist/trix.css',
-        'node_modules/ng-sortable/dist/ng-sortable.min.css',
-        'node_modules/simplemde/dist/simplemde.min.css'
+        'node_modules/angular-google-places-autocomplete/dist/autocomplete.min.css'
       ],
       js: [
         'node_modules/angular/angular.min.js',
@@ -26,10 +23,14 @@ module.exports = {
         'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
         'node_modules/angular-ui-notification/dist/angular-ui-notification.min.js',
         'node_modules/angular-google-places-autocomplete/dist/autocomplete.min.js',
-        'node_modules/angular-trix/dist/angular-trix.min.js',
         'node_modules/angular-i18n/angular-locale_es-ar.js',
         'node_modules/chart.js/dist/Chart.min.js',
-        'node_modules/angular-chart.js/dist/angular-chart.min.js'
+        'node_modules/angular-chart.js/dist/angular-chart.min.js',
+        'public/lib/angular-cookies/angular-cookies.min.js',
+        'public/lib/angular-jwt/dist/angular-jwt.min.js',
+        'public/lib/a0-angular-storage/dist/angular-storage.min.js',
+        'public/lib/auth0-lock/build/auth0-lock.min.js',
+        'public/lib/auth0-angular/build/auth0-angular.min.js',
       ]
     },
     css: [

@@ -2,8 +2,8 @@
 
 angular
   .module('dashboard')
-  .controller('DashboardController', ['Authenticated', '$scope', '$state', '$rootScope',
-    function(Authenticated, $scope, $state, $rootScope) {
+  .controller('DashboardController', ['$scope', '$state', '$rootScope',
+    function($scope, $state, $rootScope) {
       $scope.$state = $state;
       var vm = this;
       $rootScope.PERMISSIONS = $rootScope.PERMISSIONS || {};
@@ -53,10 +53,10 @@ angular
         }
       };
 
-      if (!Authenticated) {
-        $state.go('login');
-        return;
-      }
+      // if (!Authenticated) {
+      //   $state.go('login');
+      //   return;
+      // }
 
       if ($state.is('login') || $state.is('dashboard')) {
         $state.go('capacitation-centers');

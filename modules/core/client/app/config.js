@@ -9,13 +9,17 @@ window.APP = (function() {
     DEPENDENCIES: [
       'angular-loading-bar',
       'ui.router',
-      'satellizer',
       'ui.bootstrap',
       'ngFileUpload',
       'ui-notification',
       'google.places',
       'ngAnimate',
-      'chart.js'
+      'chart.js',
+      'angular-storage',
+      'auth0'
+      //'angular-jwt',
+      // 'auth0.auth0',
+      // 'auth0.lock'
     ],
     ADD_MODULE: function(moduleName, dependencies) {
       angular.module(moduleName, dependencies || []);

@@ -20,18 +20,6 @@ angular
       cfpLoadingBarProvider.includeSpinner = false;
     }
   ])
-  .config(['$authProvider', 'PATHS',
-    function($authProvider, PATHS) {
-      $authProvider.loginUrl = PATHS.AUTH;
-      $authProvider.tokenName = 'token';
-      $authProvider.authHeader = 'token';
-      $authProvider.authToken = '';
-      // $authProvider.withCredentials = false;
-      // $authProvider.tokenName = 'ch_token';
-      // $authProvider.tokenPrefix = 'ch';
-      $authProvider.storageType = 'localStorage';
-    }
-  ])
   .config(['$logProvider',
     function($logProvider) {
       $logProvider.debugEnabled(location.href.indexOf('localhost') !== -1);
@@ -59,4 +47,15 @@ angular
         PermissionsSrv.set(session.user);
       }
     }
-  ]);
+  ])
+  .config(['authProvider', function(authProvider) {
+    authProvider.init({
+      domain: 'juanpablosolari.auth0.com',
+      clientID: 'BlhdUAGVs8nENr11fvdOYov8oy5w3np6',
+      callbackUrl: location.href,
+      loginState: 'login'
+    });
+  }])
+  .run(['auth', function(auth) {
+    auth.hookEvents();
+  }]);

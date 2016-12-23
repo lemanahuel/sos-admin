@@ -10,13 +10,7 @@ angular
           templateUrl: 'modules/dashboard/views/dashboard.view.html',
           controller: 'DashboardController',
           controllerAs: 'vm',
-          resolve: {
-            Authenticated: ['$auth',
-              function($auth) {
-                return $auth.isAuthenticated();
-              }
-            ]
-          }
+          resolve: {}
         });
     }
   ]);
