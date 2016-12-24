@@ -26,24 +26,35 @@ angular
           email: profile.email
         }).then(function(User) {
           var user = User && User.data;
-          user = user[0] || user;
           console.log('user', user);
           //teacher && approved
-          if (user && user.isAdmin) {
-            SessionSrv.set({
-              user: user
-            });
-            PermissionsSrv.set(user);
-            SessionSrv.set({
-              profile: user.profile
-            });
-            $state.go('incidents');
+          if (user && user._id) {
+            if (user.isAdmin) {
+              SessionSrv.set({
+                user: user
+              });
+              PermissionsSrv.set(user);
+              SessionSrv.set({
+                profile: user.profile
+              });
+              $state.go('incidents');
+            } else {
+              NotificationsSrv.error({
+                msg: 'No tienes permisos de administrador, contactate con it@voluntariosos.com y lo resolveremos a la brevedad',
+                delay: 10000
+              });
+              $state.reload();
+            }
           } else {
-            NotificationsSrv.error({
-              msg: 'Hubo un problema con tu usuario, contactate con it@voluntariosos.com y lo resolveremos a la brevedad',
-              delay: 10000
+            UsersSrv.upsert({
+              user: profile
+            }).then(function(User) {
+              NotificationsSrv.error({
+                msg: 'Hubo un problema con tu usuario, contactate con it@voluntariosos.com y lo resolveremos a la brevedad',
+                delay: 10000
+              });
+              $state.reload();
             });
-            $state.reload();
           }
         });
       }, function(error) {
