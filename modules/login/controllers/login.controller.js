@@ -9,11 +9,12 @@ angular
       var vm = this;
 
       auth.signin({
-        primaryColor: '#43c1c2',
+        primaryColor: '#f49717',
         dict: 'es',
         icon: './modules/core/client/img/sos-logo-big.ico',
         closable: false,
-        sso: false
+        sso: false,
+        container: 'widget-container'
       }, function(profile, idToken, accessToken, state, refreshToken) {
         // All good
         console.log(profile, idToken, accessToken, state, refreshToken);
@@ -39,7 +40,7 @@ angular
             $state.go('incidents');
           } else {
             NotificationsSrv.error({
-              msg: 'Hubo un problema con tu usuario, contactate con it@coderhouse.com y lo resolveremos a la brevedad',
+              msg: 'Hubo un problema con tu usuario, contactate con it@voluntariosos.com y lo resolveremos a la brevedad',
               delay: 10000
             });
             $state.reload();
