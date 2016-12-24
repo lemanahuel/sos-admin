@@ -6,7 +6,7 @@ angular
     function($stateProvider) {
       $stateProvider
         .state('metrics', {
-          url: '/usuarios',
+          url: '/metricas',
           parent: 'dashboard',
           templateUrl: 'modules/metrics/views/metrics.view.html',
           controller: 'MetricsController',
