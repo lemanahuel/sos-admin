@@ -28,7 +28,7 @@ module.exports = {
         'node_modules/angular-chart.js/dist/angular-chart.min.js',
         'public/lib/angular-cookies/angular-cookies.min.js',
         'public/lib/angular-jwt/dist/angular-jwt.min.js',
-        'public/lib/a0-angular-storage/dist/angular-storage.min.js',
+        'node_modules/angular-storage/dist/angular-storage.min.js',
         'public/lib/auth0-lock/build/auth0-lock.min.js',
         'public/lib/auth0-angular/build/auth0-angular.min.js',
       ]
