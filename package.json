@@ -10,7 +10,8 @@
     "public/libs"
   ],
   "scripts": {
-    "start": "grunt"
+    "start": "grunt",
+    "postinstall": "bower install --config.interactive=false"
   },
   "dependencies": {
     "angular": "1.5.8",
