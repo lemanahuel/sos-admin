@@ -15,7 +15,28 @@
       <div class="col-md-12 form-content">
         <div class="row">
           <div class="col-md-12">
-            <h4>Informacion basica</h4>
+            <div class="row">
+              <div class="form-group col-md-3">
+                <label>Creada</label>
+                <input required type="text" class="form-control" ng-model="vm.incidentTmp.createdAt | date: 'dd/MM/yyyy HH:mm'" disabled />
+              </div>
+              <div class="form-group col-md-3">
+                <label>Comuna</label>
+                <input required type="text" class="form-control" ng-model="vm.incidentTmp.comuna" disabled />
+              </div>
+              <div class="form-group col-md-3">
+                <label>Ubicacion</label>
+                <input required type="text" class="form-control" ng-model="vm.incidentTmp.location.formatted_address" disabled />
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="col-md-12 form-content">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Solicitante</h4>
           </div>
         </div>
         <div class="row">
@@ -23,15 +44,15 @@
             <div class="row">
               <div class="form-group col-md-6">
                 <label>Nombre</label>
-                <input required type="text" class="form-control" ng-model="vm.incidentTmp.firstName" />
+                <input required type="text" class="form-control" ng-model="vm.incidentTmp.user.firstName" disabled />
               </div>
               <div class="form-group col-md-6">
                 <label>Apellido</label>
-                <input required type="text" class="form-control" ng-model="vm.incidentTmp.lastName" />
+                <input required type="text" class="form-control" ng-model="vm.incidentTmp.user.lastName" disabled />
               </div>
               <div class="col-md-6 form-group">
                 <label>Email</label>
-                <input required type="email" class="form-control" ng-model="vm.incidentTmp.email" />
+                <input required type="email" class="form-control" ng-model="vm.incidentTmp.user.email" disabled/>
               </div>
               <div class="form-group col-md-6">
                 <label>Telefono</label>
@@ -39,7 +60,7 @@
                   <span class="input-group-addon">
                     <i class="fa fa-mobile"></i>
                   </span>
-                  <input type="tel" class="form-control" ng-model="vm.incidentTmp.phone" />
+                  <input type="tel" class="form-control" ng-model="vm.incidentTmp.user.phone" disabled />
                 </div>
               </div>
             </div>
@@ -48,7 +69,7 @@
             <div class="row">
               <div class="form-group col-md-6">
                 <label>Genero</label>
-                <select class="form-control" ng-model="vm.incidentTmp.gender">
+                <select class="form-control" ng-model="vm.incidentTmp.user.gender" disabled>
                     <option value="">Selecciona</option>
                     <option value="hombre">Hombre</option>
                     <option value="mujer">Mujer</option>
@@ -62,50 +83,67 @@
                     <span class="input-group-addon">
                     <i class="fa fa-book" aria-hidden="true"></i>
                    </span>
-                    <input type="text" class="form-control" ng-model="vm.incidentTmp.dni" placeholder="Documento de Identidad" />
+                    <input type="text" class="form-control" ng-model="vm.incidentTmp.dni" placeholder="Documento de Identidad" disabled />
                   </div>
                 </div>
+              </div>
+              <div class="form-group col-md-6">
+                <br>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" ng-model="vm.incidentTmp.user.isVolunteer" disabled> Es voluntario
+                </label>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label>En la comuna:</label>
+                <input type="text" class="form-control" ng-model="vm.incidentTmp.user.comuna" placeholder="Comuna" disabled/>
               </div>
             </div>
           </div>
         </div>
         <hr>
       </div>
-
+      <hr>
       <div class="col-md-12 form-content">
         <div class="row">
           <div class="col-md-12">
-            <h4>Voluntario</h4>
+            <h4>Respuestas</h4>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
-            <div class="row">
-              <div class="form-group col-md-6">
-                <br>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" ng-model="vm.incidentTmp.isVolunteer" > Es voluntario
-                </label>
-                </div>
-              </div>
-              <div class="form-group col-md-6">
-                <label>Esta en la comuna:</label>
-                <input type="text" class="form-control" ng-model="vm.incidentTmp.comuna" placeholder="Comuna" />
-              </div>
-            </div>
+          <div class="col-md-12">
+            <table class="table table-hover" ng-if="vm.incidentTmp.responses.length">
+              <thead>
+                <tr>
+                  <th width="5%" ng-click="vm.onClickOrderBy('createdAt')">Nombre</th>
+                  <th width="5%" ng-click="vm.onClickOrderBy('comuna')">Apellido</th>
+                  <th width="5%" ng-click="vm.onClickOrderBy('responses')">Email</th>
+                  <th width="25%" ng-click="vm.onClickOrderBy('location.formatted_address')">Telefono</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in vm.incidentTmp.responses">
+                  <td ng-bind="item.user.firstName"></td>
+                  <td ng-bind="item.user.lastName"></td>
+                  <td ng-bind="item.user.email"></td>
+                  <td ng-bind="item.user.phone"></td>
+                </tr>
+              </tbody>
+            </table>
+            <span ng-if="!vm.incidentTmp.responses.length">No tiene respuestas</span>
           </div>
         </div>
+        <br>
       </div>
-      <hr>
       <div class="col-md-12">
         <div class="row btns-container">
           <div class="col-md-12">
             <div class="btn-group" role="group">
               <button type="button" ng-click="vm.onClickDelete($event)" class="btn btn-link" ng-show="vm.incidentTmp._id">Eliminar</button>
-              <button type="button" ui-sref="users" class="btn  btn-default">Cancelar</button>
+              <button type="button" ui-sref="incidents" class="btn  btn-default">Volver</button>
             </div>
-            <button type="submit" ng-if="::!PERMISSIONS.reader" class="btn btn-primary pull-right">Guardar</button>
+            <!--<button type="submit" ng-if="::!PERMISSIONS.reader" class="btn btn-primary pull-right">Guardar</button>-->
           </div>
         </div>
       </div>
