@@ -10,7 +10,8 @@ window.SOS_API = (function() {
   if (host.indexOf('herokuapp') !== -1) {
     base = (host.indexOf('-qa') !== -1 ? 'sos-api-qa' : host.indexOf('-dev') !== -1 ? 'sos-api-dev' : 'sos-api') + '.herokuapp.com';
   } else if (host.indexOf('voluntariosos') !== -1) {
-    base = 'api.voluntariosos.' + (host.indexOf('.io') !== -1 ? 'io' : 'com');
+    //base = 'api.voluntariosos.' + (host.indexOf('.io') !== -1 ? 'io' : 'com');
+    base = 'sos-api-prod.herokuapp.com';
   } else if (host.indexOf('localhost') === -1) {
     base = host.split(':')[0] + ':3001';
   }
