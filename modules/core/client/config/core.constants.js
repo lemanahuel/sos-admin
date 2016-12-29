@@ -9,7 +9,7 @@ window.SOS_API = (function() {
 
   if (host.indexOf('-qa.herokuapp') !== -1) {
     base = 'sos-api-qa.herokuapp.com';
-  } else if (host.indexOf('voluntariosos') !== -1 || host.indexOf('-prod.herokuapp') !== -1) {
+  } else if (host.indexOf('voluntariosos') !== -1 || host.indexOf('-prod') !== -1) {
     //base = 'api.voluntariosos.' + (host.indexOf('.io') !== -1 ? 'io' : 'com');
     base = 'sos-api-prod.herokuapp.com';
   } else if (host.indexOf('localhost') === -1) {
