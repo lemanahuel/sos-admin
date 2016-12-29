@@ -8,7 +8,7 @@ window.SOS_API = (function() {
     base = 'localhost:3001';
 
   if (host.indexOf('-qa.herokuapp') !== -1) {
-    base = (host.indexOf('-qa') !== -1 ? 'sos-api-qa' : host.indexOf('-dev') !== -1 ? 'sos-api-dev' : 'sos-api') + '.herokuapp.com';
+    base = 'sos-api-qa.herokuapp.com';
   } else if (host.indexOf('voluntariosos') !== -1 || host.indexOf('-prod.herokuapp') !== -1) {
     //base = 'api.voluntariosos.' + (host.indexOf('.io') !== -1 ? 'io' : 'com');
     base = 'sos-api-prod.herokuapp.com';
